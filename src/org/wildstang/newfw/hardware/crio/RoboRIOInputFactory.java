@@ -11,7 +11,7 @@ import org.wildstang.newfw.hardware.crio.inputs.WsAnalogInput;
 import org.wildstang.newfw.hardware.crio.inputs.WsDigitalInput;
 import org.wildstang.newfw.hardware.crio.inputs.WsHallEffectInput;
 import org.wildstang.newfw.hardware.crio.inputs.WsLIDAR;
-import org.wildstang.yearly.robot.WSInputs;
+
 
 import edu.wpi.first.wpilibj.I2C.Port;
 
@@ -53,9 +53,6 @@ public class RoboRIOInputFactory implements InputFactory
          s_log.fine("Creating analog input: Name = " + p_input.getName() + ", type = " + p_input.getType() + ", port = " + p_input.getPort() + ", default = " + p_input.getDefault());
       }
       
-      WSInputs wsInput = (WSInputs)p_input;
-
-
       switch ((WSInputType)p_input.getType())
       {
          case POT:
