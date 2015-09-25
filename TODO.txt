@@ -1,0 +1,27 @@
+* fw.config package
+	- So far, all config parameter classes pass through to Core.Config
+	- Need to eventually change over to use Config directly and remove the ConfigParameter classes - they are not necessary
+
+	- Removed ability to load update file - could be added if needed (was not called in code)
+
+* hardware.crio.outputs
+	- Finish
+		- WsDriveSpeed
+
+* hardware.crio.inputs
+	- Finish
+		- LidarSensor
+
+* May need to (make sense to) bring back the double motor output (DriveSpeed) for safety where two motors need the same output value
+
+* Need a way to set an input value during autonomous
+	- Perhaps set the value then call notifyListeners
+		- This should work, just make setValue() public
+
+* Work out
+	- Passing channels, especially two channel outputs
+
+* Need a way to reset outputs after autonomous
+
+
+
