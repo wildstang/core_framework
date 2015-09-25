@@ -1,6 +1,5 @@
-package org.wildstang.fw.subsystemmanager;
+package org.wildstang.fw.auto;
 
-import org.wildstang.fw.auto.AutoProgram;
 
 /**
  *
