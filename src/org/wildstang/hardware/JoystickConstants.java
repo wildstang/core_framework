@@ -1,4 +1,4 @@
-package org.wildstang.newfw.hardware;
+package org.wildstang.hardware;
 
 public final class JoystickConstants
 {

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.wildstang.newfw.hardware.crio.outputs;
+package org.wildstang.hardware.crio.outputs;
 
 import org.wildstang.framework.io.outputs.AnalogOutput;
 

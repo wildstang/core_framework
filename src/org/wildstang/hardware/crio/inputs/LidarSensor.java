@@ -1,4 +1,4 @@
-package org.wildstang.newfw.hardware.crio.inputs;
+package org.wildstang.hardware.crio.inputs;
 
 import java.util.TimerTask;
 

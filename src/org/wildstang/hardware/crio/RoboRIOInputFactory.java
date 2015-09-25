@@ -1,4 +1,4 @@
-package org.wildstang.newfw.hardware.crio;
+package org.wildstang.hardware.crio;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -6,11 +6,12 @@ import java.util.logging.Logger;
 import org.wildstang.framework.core.Inputs;
 import org.wildstang.framework.hardware.InputFactory;
 import org.wildstang.framework.io.Input;
-import org.wildstang.newfw.hardware.crio.inputs.WSInputType;
-import org.wildstang.newfw.hardware.crio.inputs.WsAnalogInput;
-import org.wildstang.newfw.hardware.crio.inputs.WsDigitalInput;
-import org.wildstang.newfw.hardware.crio.inputs.WsHallEffectInput;
-import org.wildstang.newfw.hardware.crio.inputs.WsLIDAR;
+import org.wildstang.hardware.crio.inputs.WSInputType;
+import org.wildstang.hardware.crio.inputs.WsAnalogInput;
+import org.wildstang.hardware.crio.inputs.WsDigitalInput;
+import org.wildstang.hardware.crio.inputs.WsHallEffectInput;
+import org.wildstang.hardware.crio.inputs.WsLIDAR;
+
 
 
 import edu.wpi.first.wpilibj.I2C.Port;

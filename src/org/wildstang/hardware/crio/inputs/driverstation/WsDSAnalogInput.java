@@ -1,4 +1,4 @@
-package org.wildstang.newfw.hardware.crio.inputs.driverstation;
+package org.wildstang.hardware.crio.inputs.driverstation;
 
 import org.wildstang.framework.io.inputs.AnalogInput;
 

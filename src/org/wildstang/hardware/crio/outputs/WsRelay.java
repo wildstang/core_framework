@@ -1,4 +1,4 @@
-package org.wildstang.newfw.hardware.crio.outputs;
+package org.wildstang.hardware.crio.outputs;
 
 import org.wildstang.framework.io.outputs.DiscreteOutput;
 

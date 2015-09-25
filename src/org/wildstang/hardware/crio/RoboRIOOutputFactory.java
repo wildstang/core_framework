@@ -1,4 +1,4 @@
-package org.wildstang.newfw.hardware.crio;
+package org.wildstang.hardware.crio;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -6,14 +6,14 @@ import java.util.logging.Logger;
 import org.wildstang.framework.core.Outputs;
 import org.wildstang.framework.hardware.OutputFactory;
 import org.wildstang.framework.io.Output;
-import org.wildstang.newfw.hardware.crio.outputs.WSOutputType;
-import org.wildstang.newfw.hardware.crio.outputs.WsDigitalOutput;
-import org.wildstang.newfw.hardware.crio.outputs.WsDoubleSolenoid;
-import org.wildstang.newfw.hardware.crio.outputs.WsRelay;
-import org.wildstang.newfw.hardware.crio.outputs.WsServo;
-import org.wildstang.newfw.hardware.crio.outputs.WsSolenoid;
-import org.wildstang.newfw.hardware.crio.outputs.WsTalon;
-import org.wildstang.newfw.hardware.crio.outputs.WsVictor;
+import org.wildstang.hardware.crio.outputs.WSOutputType;
+import org.wildstang.hardware.crio.outputs.WsDigitalOutput;
+import org.wildstang.hardware.crio.outputs.WsDoubleSolenoid;
+import org.wildstang.hardware.crio.outputs.WsRelay;
+import org.wildstang.hardware.crio.outputs.WsServo;
+import org.wildstang.hardware.crio.outputs.WsSolenoid;
+import org.wildstang.hardware.crio.outputs.WsTalon;
+import org.wildstang.hardware.crio.outputs.WsVictor;
 
 import edu.wpi.first.wpilibj.Relay.Direction;
 
