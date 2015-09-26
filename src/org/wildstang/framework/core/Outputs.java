@@ -11,6 +11,8 @@ public interface Outputs
 
    public Object getPort();
    
+   public Object getPort2();
+
    public Object getModule();
 
    public Object getDefault();

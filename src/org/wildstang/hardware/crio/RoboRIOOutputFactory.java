@@ -76,7 +76,7 @@ public class RoboRIOOutputFactory implements OutputFactory
             out = new WsSolenoid(p_output.getName(), (int)p_output.getPort());
             break;
          case SOLENOID_DOUBLE:
-            out = new WsDoubleSolenoid(p_output.getName(), (int)p_output.getModule(), (int)p_output.getPort(), (int)p_output.getDefault());
+            out = new WsDoubleSolenoid(p_output.getName(), (int)p_output.getModule(), (int)p_output.getPort(), (int)p_output.getPort2(), (int)p_output.getDefault());
             break;
          case NULL:
          default:
