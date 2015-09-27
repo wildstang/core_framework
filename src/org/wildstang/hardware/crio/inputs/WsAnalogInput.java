@@ -26,10 +26,4 @@ public class WsAnalogInput extends org.wildstang.framework.io.inputs.AnalogInput
       return input.getAverageVoltage();
    }
 
-
-   public void notifyConfigChange()
-   {
-      // Nothing to update here, since the config value only affect the
-      // start state.
-   }
 }

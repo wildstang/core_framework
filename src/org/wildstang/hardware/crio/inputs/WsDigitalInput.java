@@ -24,11 +24,4 @@ public class WsDigitalInput extends org.wildstang.framework.io.inputs.DigitalInp
    {
       return input.get();
    }
-
-
-   public void notifyConfigChange()
-   {
-      // Nothing to update here, since the config value only affect the
-      // start state.
-   }
 }

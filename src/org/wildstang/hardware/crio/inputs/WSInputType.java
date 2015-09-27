@@ -7,6 +7,9 @@ public enum WSInputType implements InputType
    SWITCH("Digital"),
    HALL_EFFECT("Hall Effect"),
    POT("Analog"),
+   JS_BUTTON("Joystick Button"),
+   JS_JOYSTICK("Joystick"),
+   JS_DPAD("Joystick DPad"),
    LIDAR("LIDAR"),
    NULL("Null");
 

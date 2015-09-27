@@ -10,7 +10,11 @@ import org.wildstang.hardware.crio.inputs.WSInputType;
 import org.wildstang.hardware.crio.inputs.WsAnalogInput;
 import org.wildstang.hardware.crio.inputs.WsDigitalInput;
 import org.wildstang.hardware.crio.inputs.WsHallEffectInput;
+import org.wildstang.hardware.crio.inputs.WsJoystickAxis;
+import org.wildstang.hardware.crio.inputs.WsJoystickButton;
 import org.wildstang.hardware.crio.inputs.WsLIDAR;
+
+
 
 
 
@@ -69,6 +73,12 @@ public class RoboRIOInputFactory implements InputFactory
          case LIDAR:
             // Port is the address, module is the port - such as I2C.kMXP
             in = new WsLIDAR(p_input.getName(), (Port)p_input.getModule(), (int)p_input.getPort());
+            break;
+         case JS_BUTTON:
+            in = new WsJoystickButton(p_input.getName(), (int)p_input.getModule(), (int)p_input.getPort());
+            break;
+         case JS_JOYSTICK:
+            in = new WsJoystickAxis(p_input.getName(), (int)p_input.getModule(), (int)p_input.getPort());
             break;
          case NULL:
          default:
