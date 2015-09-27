@@ -14,7 +14,8 @@ public enum DummyOutputs implements Outputs
 
    private final String m_name;
    private final OutputType m_type;
-   private final String m_port;
+   private final Object m_port;
+   private final Object m_port2;
    private Object m_default;
    private Object m_module;
    private boolean m_trackingState;
@@ -24,6 +25,7 @@ public enum DummyOutputs implements Outputs
       m_name = p_name;
       m_type = p_type;
       m_port = p_port;
+      m_port2 = null;
       m_trackingState = p_trackingState;
    }
    
@@ -32,6 +34,7 @@ public enum DummyOutputs implements Outputs
       m_name = p_name;
       m_type = p_type;
       m_port = p_port;
+      m_port2 = null;
       m_default = p_default;
       m_trackingState = p_trackingState;
    }
@@ -41,6 +44,17 @@ public enum DummyOutputs implements Outputs
       m_name = p_name;
       m_type = p_type;
       m_port = p_port;
+      m_port2 = null;
+      m_default = p_default;
+      m_trackingState = p_trackingState;
+   }
+   
+   DummyOutputs(String p_name, OutputType p_type, String p_port, String p_port2, double p_default, boolean p_trackingState)
+   {
+      m_name = p_name;
+      m_type = p_type;
+      m_port = p_port;
+      m_port2 = p_port2;
       m_default = p_default;
       m_trackingState = p_trackingState;
    }
@@ -61,6 +75,12 @@ public enum DummyOutputs implements Outputs
    public Object getPort()
    {
       return m_port;
+   }
+   
+   @Override
+   public Object getPort2()
+   {
+      return m_port2;
    }
    
    @Override
