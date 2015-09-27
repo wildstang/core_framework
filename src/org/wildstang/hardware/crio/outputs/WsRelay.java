@@ -45,7 +45,4 @@ public class WsRelay extends DiscreteOutput
       relay.set((Value) value);
    }
 
-   public void notifyConfigChange()
-   {
-   }
 }
