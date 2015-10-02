@@ -12,5 +12,6 @@
 
 * Need a way to reset outputs after autonomous
 
+* Joystick DPad inputs
 
 
