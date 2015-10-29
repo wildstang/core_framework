@@ -7,16 +7,18 @@ public interface IOutputManager
    /**
     * Updates all outputs registered with the manager.
     */
-   public abstract void update();
+   public void update();
 
-   public abstract void addOutput(Output p_output);
+   public void addOutput(Output p_output);
 
-   public abstract void removeOutput(Output p_output);
+   public void removeOutput(Output p_output);
 
-   public abstract Output getOutput(String p_name);
+   public Output getOutput(String p_name);
 
-   public abstract int size();
+   public int size();
 
-   public abstract void removeAll();
+   public void removeAll();
+
+   public boolean contains(String p_name);
 
 }

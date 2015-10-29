@@ -10,6 +10,8 @@ import org.wildstang.framework.io.Input;
 import org.wildstang.framework.io.InputListener;
 import org.wildstang.framework.logger.StateTracker;
 
+import com.sun.jndi.cosnaming.CNNameParser;
+
 /**
  * This is an abstract implementation of the Input interface. This class
  * implements the Input listener mechanism.
@@ -56,6 +58,8 @@ public abstract class AbstractInput implements Input
    @Override
    public void removeInputListener(InputListener p_listener)
    {
+      CoreUtils.checkNotNull(p_listener, "p_listener is null");
+      
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "removeInputListener");
 
       for (int i = 0; i < m_listeners.size(); i++)

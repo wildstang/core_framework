@@ -14,6 +14,7 @@ import org.wildstang.framework.BaseTest;
 import org.wildstang.framework.io.Input;
 import org.wildstang.framework.io.InputManager;
 import org.wildstang.framework.io.inputs.AbstractInput;
+import org.wildstang.framework.io.inputs.RandomAnalogInput;
 
 /**
  * @author Steve
@@ -23,7 +24,7 @@ public class TestInputManager extends BaseTest
 {
 
    Input mockInput;
-   InputManager manager;
+   IInputManager manager;
    
    /**
     * @throws java.lang.Exception
@@ -209,12 +210,14 @@ public class TestInputManager extends BaseTest
       // 2. Call add with valid input
       resetAll();
       configureLogging();
-      manager.addInput(mockInput);
+      expect(mockInput.getName()).andReturn("TestInput").anyTimes();
       replay(mockInput);
+
+      manager.addInput(mockInput);
       
       // validate number of inputs
       assertEquals(1, manager.size());
-      
+
    }
 
    @Test
@@ -223,9 +226,11 @@ public class TestInputManager extends BaseTest
       // 3. Call add with input that already exists in manager
       resetAll();
       configureLogging();
-      manager.addInput(mockInput);
-      manager.addInput(mockInput);
+      expect(mockInput.getName()).andReturn("TestInput").anyTimes();
       replay(mockInput);
+
+      manager.addInput(mockInput);
+      manager.addInput(mockInput);
       
       // validate number of inputs
       assertEquals(1, manager.size());
@@ -263,8 +268,10 @@ public class TestInputManager extends BaseTest
       // Add the input
       resetAll();
       configureLogging();
-      manager.addInput(mockInput);
+      expect(mockInput.getName()).andReturn("TestInput").anyTimes();
       replay(mockInput);
+
+      manager.addInput(mockInput);
       
       // validate number of inputs
       assertEquals(1, manager.size());
@@ -274,6 +281,7 @@ public class TestInputManager extends BaseTest
 
       // remove the test input
       configureLogging();
+      expect(mockInput.getName()).andReturn("TestInput").anyTimes();
       replayAll();
       manager.removeInput(mockInput);
       verifyAll();

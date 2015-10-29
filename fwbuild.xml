@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Robot_Framework" default="all" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
+	<property file="fwbuild.properties"></property>
+	<property name="config.file.name" value="config.txt" />
+	<property name="debug" value="true" />
+
+	<!-- Taskdef for JaCoCo code coverage -->
+	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+	    <classpath path="${lib.dir}/jacocoant.jar"/>
+	</taskdef>
+	
+	<!-- Removes all output files - class files and JAR files -->
+	<!-- Does not remove reports -->
+	<target name="clean">
+		<echo>Target clean</echo>
+		<delete dir="${class.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${test.class.dir}" />
+	</target>
+	
+	<!-- Removes all generated files including reports -->
+	<target name="cleanall" depends="clean">
+		<echo>Target clean all</echo>
+		<delete dir="${test.report.dir}" />
+	</target>
+	
+	<target name="init">
+		<mkdir dir="${class.dir}" />
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${test.class.dir}" />
+		<mkdir dir="${junit.report.dir}" />
+		<mkdir dir="${coverage.report.dir}" />
+	</target>
+	
+	<!-- Compiles all source files -->
+	<target name="compile" depends="init">
+		<echo>Target compile</echo>
+		<!-- Compile project source -->
+		<javac target="1.7" srcdir="${source.dir}" destdir="${class.dir}" includeantruntime="false" debug="${debug}">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${dist.lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="compileunittests" depends="compile">
+		<echo>Target compile unit tests</echo>
+		<!-- Compile unit tests - output to different directory so they are not included in the JAR file -->
+		<javac target="1.7" srcdir="${test.source.dir}" destdir="${test.class.dir}" includeantruntime="false">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${dist.lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<pathelement location="${class.dir}" />
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- Does a full build - clean, compile, JAR (maybe copy to device) -->
+	<target name="dist" depends="jar">
+		<echo>Target dist</echo>
+		
+		<!-- Copy the config file -->
+		<copy file="${config.file.name}" todir="${dist.dir}"/>
+		
+		<!-- Copy JARs in dist lib to dist dir -->
+		<copy todir="${dist.dir}">
+	    	<fileset dir="${dist.lib.dir}">
+				<include name="**/*"/>
+	    	</fileset>
+		</copy>
+	</target>
+
+	<!-- Creates the JAR file -->
+	<!-- Only create the JAR if the unittests pass -->
+	<target name="jar" depends="unittest"><!-- unless="${testerror}"> -->
+		<echo>Target jar</echo>
+		<!-- Recompile without debug -->
+		<delete dir="${class.dir}" />
+		<antcall target="compile">
+			<param name="debug" value="false" />
+		</antcall>
+		<jar destfile="${dist.dir}/${dist.jar}" basedir="${class.dir}" />
+	</target>
+
+	<!-- Equivalent to dist -->
+	<target name="all" depends="dist">
+		<echo>Target all</echo>
+	</target>
+
+	<path id="junit.class.path">
+		<pathelement location="${lib.dir}/junit-4.12.jar" />
+		<pathelement location="${lib.dir}/hamcrest-core-1.3.jar" />
+		<pathelement location="${class.dir}" />
+	</path>
+	
+	<target name="unittest" depends="compileunittests">
+		<jacoco:coverage destfile="${coverage.exec.data}">
+			<!-- Call junit to run unit tests.  Will run inside code coverage task -->
+			<junit fork="true" forkmode="once" printsummary="on" failureproperty="testerror" errorproperty="testerror">
+				<formatter type="xml" usefile="true" />
+				<classpath refid="junit.class.path" />
+				<classpath>
+					<pathelement location="${test.class.dir}"/>
+				</classpath>
+				<classpath>
+					<fileset dir="${lib.dir}">
+						<include name="**/*.jar"/>
+					</fileset>
+					<pathelement location="${class.dir}" />
+				</classpath>
+				<formatter type="xml" />
+				<batchtest todir="${junit.report.dir}">
+					<fileset dir="${test.source.dir}">
+						<include name="**/Test*.java" />
+					</fileset>
+				</batchtest>
+			</junit>
+		</jacoco:coverage>
+
+		<!-- Create junit report -->
+		<junitreport todir="${junit.report.dir}">
+		  <fileset dir="${junit.report.dir}">
+		    <include name="TEST-*.xml"/>
+		  </fileset>
+		  <report format="frames" todir="${junit.report.dir}/html"/>
+		</junitreport>
+
+		<!-- Create code coverage report -->
+		<available file="${coverage.exec.data}" property="coverage.data.exists"/>
+		<antcall target="createcoveragereport"></antcall>
+	</target>
+
+	<target name="createcoveragereport" if="${coverage.data.exists}">
+		<jacoco:report>
+		    <executiondata>
+		        <file file="${coverage.exec.data}"/>
+		    </executiondata>
+		                        
+		    <structure name="AVC 2016">
+		        <classfiles>
+		            <fileset dir="${class.dir}"/>
+		        </classfiles>
+		        <sourcefiles encoding="UTF-8">
+		            <fileset dir="${source.dir}"/>
+		        </sourcefiles>
+		    </structure>
+		                        
+		    <html destdir="${coverage.report.dir}"/>
+		</jacoco:report>
+	</target>
+	
+</project>

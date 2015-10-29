@@ -14,7 +14,7 @@ import org.wildstang.framework.io.OutputManager;
 public class TestOutputManager extends BaseTest
 {
    Output mockOutput;
-   OutputManager manager;
+   IOutputManager manager;
    
    @Before
    public void setUp() throws Exception
@@ -76,10 +76,10 @@ public class TestOutputManager extends BaseTest
 //-----------------------------------------
 
       // 2. Call update with multiple Outputs added to manager
+      resetAll();
       Output mockOutput2 = createNiceMock(Output.class);
       manager.addOutput(mockOutput2);
       
-      resetAll();
       configureLogging();
       expect(mockOutput2.getName()).andReturn("TestOutput2").anyTimes();
       expect(mockOutput.isEnabled()).andReturn(true).anyTimes();
@@ -191,8 +191,10 @@ public class TestOutputManager extends BaseTest
       // 2. Call add with valid output
       resetAll();
       configureLogging();
-      manager.addOutput(mockOutput);
+      expect(mockOutput.getName()).andReturn("TestInput").anyTimes();
       replay(mockOutput);
+
+      manager.addOutput(mockOutput);
       
       // validate number of outputs
       assertEquals(1, manager.size());
@@ -203,8 +205,10 @@ public class TestOutputManager extends BaseTest
       // 3. Call add with output that already exists in manager
       resetAll();
       configureLogging();
-      manager.addOutput(mockOutput);
+      expect(mockOutput.getName()).andReturn("TestInput").anyTimes();
       replay(mockOutput);
+      
+      manager.addOutput(mockOutput);
       
       // validate number of outputs
       assertEquals(1, manager.size());
@@ -244,8 +248,10 @@ public class TestOutputManager extends BaseTest
       // 2. Call remove with output that exists in the manager
       resetAll();
       configureLogging();
-      manager.addOutput(mockOutput);
+      expect(mockOutput.getName()).andReturn("TestInput").anyTimes();
       replay(mockOutput);
+
+      manager.addOutput(mockOutput);
       
       // validate number of outputs
       assertEquals(1, manager.size());
@@ -255,7 +261,9 @@ public class TestOutputManager extends BaseTest
 
       // remove the test output
       configureLogging();
+      expect(mockOutput.getName()).andReturn("TestInput").anyTimes();
       replayAll();
+
       manager.removeOutput(mockOutput);
       verify();
       
