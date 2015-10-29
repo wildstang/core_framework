@@ -14,7 +14,7 @@ import org.wildstang.framework.io.OutputManager;
 public class TestOutputManager extends BaseTest
 {
    Output mockOutput;
-   OutputManager manager;
+   IOutputManager manager;
    
    @Before
    public void setUp() throws Exception

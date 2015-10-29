@@ -101,7 +101,13 @@ public class OutputManager implements IOutputManager
       
       return output;
    }
-   
+
+   @Override
+   public boolean contains(String p_name)
+   {
+      CoreUtils.checkNotNull(p_name, "p_name is null");
+      return m_outputs.containsKey(p_name);
+   }
    
    @Override
    public int size()

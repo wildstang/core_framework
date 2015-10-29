@@ -18,13 +18,9 @@
 * Need to stream logs over ethernet to offboard processor
 
 * InputManager and OutputManager
-	- Add contains() method to check to see if the given input/output exists in the manager
 	- Change getInput/getOutput to throw NoSuchElementException if it does not exist
-	- Will need to change the lists to maps to make this efficient
-	- getInput()/getOutput() currently inefficient - use flag to indicate it is found and break early, or convert to Map from List
 
 * AbstractInput.removeListener()
-	- Add check for null parameter
 	- Update remove unit test to test for null parameter
 
 * Check the failing tests for any that need code checked and updated to meet the test

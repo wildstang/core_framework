@@ -106,6 +106,13 @@ public class InputManager implements IInputManager
    }
 
    @Override
+   public boolean contains(String p_name)
+   {
+      CoreUtils.checkNotNull(p_name, "p_name is null");
+      return m_inputs.containsKey(p_name);
+   }
+   
+   @Override
    public int size()
    {
       return m_inputs.size();

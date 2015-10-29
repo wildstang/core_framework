@@ -24,7 +24,7 @@ public class TestInputManager extends BaseTest
 {
 
    Input mockInput;
-   InputManager manager;
+   IInputManager manager;
    
    /**
     * @throws java.lang.Exception
