@@ -1,6 +1,6 @@
 package org.wildstang.framework.io;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +17,7 @@ public class OutputManager implements IOutputManager
    private static Logger s_log = Logger.getLogger(OutputManager.class.getName());
    private static final String s_className = "OutputManager";
 
-   private ArrayList<Output> m_outputs = new ArrayList<Output>();
+   private HashMap<String, Output> m_outputs = new HashMap<String, Output>();
    private boolean s_initialised = false;
 
    public OutputManager()
@@ -43,7 +43,7 @@ public class OutputManager implements IOutputManager
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "update");
 
       // Iterate over all outputs and update each one
-      for (Output out : m_outputs)
+      for (Output out : m_outputs.values())
       {
          if (out.isEnabled())
          {
@@ -72,9 +72,9 @@ public class OutputManager implements IOutputManager
    {
       CoreUtils.checkNotNull(p_output, "p_output is null");
       
-      if (!m_outputs.contains(p_output))
+      if (!m_outputs.containsKey(p_output.getName()))
       {
-         m_outputs.add(p_output);
+         m_outputs.put(p_output.getName(), p_output);
       }
    }
    
@@ -87,7 +87,7 @@ public class OutputManager implements IOutputManager
       {
          s_log.warning("Removing output " + p_output.getName());
       }
-      m_outputs.remove(p_output);
+      m_outputs.remove(p_output.getName());
    }
 
    
@@ -97,13 +97,7 @@ public class OutputManager implements IOutputManager
       CoreUtils.checkNotNull(p_name, "p_name is null");
       Output output = null;
       
-      for (Output out : m_outputs)
-      {
-         if (out.getName().equals(p_name))
-         {
-            output = out;
-         }
-      }
+      output = m_outputs.get(p_name);
       
       return output;
    }
