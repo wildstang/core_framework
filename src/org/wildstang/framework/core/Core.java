@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.wildstang.framework.CoreUtils;
+import org.wildstang.framework.auto.AutoManager;
 import org.wildstang.framework.config.ConfigManager;
 import org.wildstang.framework.hardware.InputFactory;
 import org.wildstang.framework.hardware.OutputFactory;
@@ -25,6 +26,8 @@ public class Core
    private static StateTracker s_stateTracker;
    private static InputFactory s_inputFactory;
    private static OutputFactory s_outputFactory;
+
+   private AutoManager m_autoManager = null;
    
    private Class m_inputFactoryClass;
    private Class m_outputFactoryClass;
@@ -176,6 +179,12 @@ public class Core
       return obj;
    }
 
+   
+   public void setAutoManager(AutoManager p_autoManager)
+   {
+      m_autoManager = p_autoManager;
+   }
+
 
    public void executeUpdate()
    {
@@ -184,6 +193,10 @@ public class Core
       // Read input from hardware
       s_inputManager.update();
 
+      if (m_autoManager != null)
+      {
+         m_autoManager.update();
+      }
       // Let subsystems react to changes
       s_subsystemManager.update();
 
