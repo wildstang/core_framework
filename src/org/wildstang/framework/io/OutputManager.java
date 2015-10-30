@@ -1,6 +1,7 @@
 package org.wildstang.framework.io;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -97,6 +98,10 @@ public class OutputManager implements IOutputManager
       CoreUtils.checkNotNull(p_name, "p_name is null");
       Output output = null;
       
+      if (!m_outputs.containsKey(p_name))
+      {
+         throw new NoSuchElementException("No input with name '" + p_name + "' in InputManager");
+      }
       output = m_outputs.get(p_name);
       
       return output;

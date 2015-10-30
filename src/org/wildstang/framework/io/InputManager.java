@@ -1,6 +1,7 @@
 package org.wildstang.framework.io;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -99,7 +100,11 @@ public class InputManager implements IInputManager
    {
       CoreUtils.checkNotNull(p_name, "p_name is null");
       Input result = null;
-      
+
+      if (!m_inputs.containsKey(p_name))
+      {
+         throw new NoSuchElementException("No input with name '" + p_name + "' in InputManager");
+      }
       result = m_inputs.get(p_name);
 
       return result;

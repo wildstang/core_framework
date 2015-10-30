@@ -219,6 +219,33 @@ public class TestAbstractInput extends BaseTest
       assertEquals(0, randomInput.getInputListeners().size());
    }
 
+   @Test(expected=NullPointerException.class)
+   public void testRemoveInputListenerNull()
+   {
+      InputListener mockListener2 = createMock(InputListener.class);
+      configureLogging();
+      replayAll();
+      
+      randomInput.addInputListener(mockListener);
+      randomInput.addInputListener(mockListener2);
+      
+      assertEquals(2, randomInput.getInputListeners().size());
+      
+      randomInput.removeInputListener(null);
+      
+      assertEquals(1, randomInput.getInputListeners().size());
+      
+      assertTrue(randomInput.getInputListeners().contains(mockListener));
+
+      resetAll();
+      configureLogging();
+      replayAll();
+
+      randomInput.removeInputListener(mockListener);
+      
+      assertEquals(0, randomInput.getInputListeners().size());
+   }
+
    @Test
    public void testRemoveAllListener()
    {

@@ -1,3 +1,7 @@
+* Joystick DPad inputs
+
+* Need to stream logs over ethernet to offboard processor
+
 * fw.config package
 	- Removed ability to load update file - could be added if needed (was not called in code)
 
@@ -11,17 +15,11 @@
 	- Passing channels, especially two channel outputs
 
 * Need a way to reset outputs after autonomous
+	- Maybe
 
-* Joystick DPad inputs
-
-
-* Need to stream logs over ethernet to offboard processor
 
 * InputManager and OutputManager
-	- Change getInput/getOutput to throw NoSuchElementException if it does not exist
-
-* AbstractInput.removeListener()
-	- Update remove unit test to test for null parameter
+	- Add tests to check for NoSuchElementException for getInput/getOutput
 
 * Check the failing tests for any that need code checked and updated to meet the test
 
