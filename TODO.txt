@@ -12,7 +12,7 @@
 		- This should work, just make setValue() public
 
 * Work out
-	- Passing channels, especially two channel outputs
+	- Passing channels, especially two channel outputs, to input/output factories
 
 * Need a way to reset outputs after autonomous
 	- Maybe
