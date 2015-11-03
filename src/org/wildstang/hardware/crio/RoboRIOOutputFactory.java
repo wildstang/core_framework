@@ -15,6 +15,7 @@ import org.wildstang.hardware.crio.outputs.WsSolenoid;
 import org.wildstang.hardware.crio.outputs.WsTalon;
 import org.wildstang.hardware.crio.outputs.WsVictor;
 
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Direction;
 
 public class RoboRIOOutputFactory implements OutputFactory
@@ -64,7 +65,20 @@ public class RoboRIOOutputFactory implements OutputFactory
             out = new WsServo(p_output.getName(), (int)p_output.getPort(), (double)p_output.getDefault());
             break;
          case RELAY:
-            out = new WsRelay(p_output.getName(), (int)p_output.getPort(), (Direction)p_output.getDefault());
+        	 Relay.Direction dir;
+        	 if((double)p_output.getDefault() == 0.0)
+        	 {
+        		 dir = Relay.Direction.kReverse;
+        	 }
+        	 else if((double)p_output.getDefault() == 1.0)
+        	 {
+        		 dir = Relay.Direction.kBoth;
+        	 }
+        	 else
+        	 {
+        		 dir = Relay.Direction.kForward;
+        	 }
+            out = new WsRelay(p_output.getName(), (int)p_output.getPort(), dir);
             break;
          case VICTOR:
             out = new WsVictor(p_output.getName(), (int)p_output.getPort(), (double)p_output.getDefault());
@@ -76,7 +90,7 @@ public class RoboRIOOutputFactory implements OutputFactory
             out = new WsSolenoid(p_output.getName(), (int)p_output.getPort());
             break;
          case SOLENOID_DOUBLE:
-            out = new WsDoubleSolenoid(p_output.getName(), (int)p_output.getModule(), (int)p_output.getPort(), (int)p_output.getPort2(), (int)p_output.getDefault());
+            out = new WsDoubleSolenoid(p_output.getName(), (int)p_output.getModule(), (int)p_output.getPort(), (int)p_output.getPort2(),((Double)p_output.getDefault()).intValue());
             break;
          case NULL:
          default:

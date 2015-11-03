@@ -78,6 +78,9 @@ public class RoboRIOInputFactory implements InputFactory
             in = new WsJoystickButton(p_input.getName(), (int)p_input.getModule(), (int)p_input.getPort());
             break;
          case JS_JOYSTICK:
+        	 System.out.println(p_input.getName());
+        	 System.out.println(p_input.getModule());
+        	 System.out.println(p_input.getPort());
             in = new WsJoystickAxis(p_input.getName(), (int)p_input.getModule(), (int)p_input.getPort());
             break;
          case NULL:

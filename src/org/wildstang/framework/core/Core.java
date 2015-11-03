@@ -116,7 +116,8 @@ public class Core
          in = s_inputFactory.createInput(input);
    
          // Add the input to the input manager
-         if (input.isTrackingState())
+         //FIX LATER
+         if (!input.isTrackingState())
          {
             in.setStateTracker(s_stateTracker);
             s_stateTracker.addIOInfo(input.getName(), input.getType().toString(), "Input", input.getPort());
