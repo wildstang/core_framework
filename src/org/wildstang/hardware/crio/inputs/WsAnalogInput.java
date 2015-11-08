@@ -14,9 +14,9 @@ public class WsAnalogInput extends org.wildstang.framework.io.inputs.AnalogInput
 
    // By giving the input number in the constructor we can make this generic
    // for all digital inputs
-   public WsAnalogInput(String p_name, int channel, double p_default)
+   public WsAnalogInput(String p_name, int channel)
    {
-      super(p_name, p_default);
+      super(p_name);
 
       input = new AnalogInput(channel);
    }

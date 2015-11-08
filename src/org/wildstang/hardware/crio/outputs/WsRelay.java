@@ -13,33 +13,32 @@ public class WsRelay extends DiscreteOutput
 {
    private Relay relay;
    
-   public static final int RELAY_OFF = 0;
-   public static final int RELAY_ON = 1;
-   public static final int RELAY_FORWARD = 2;
-   public static final int RELAY_REVERSE = 3;
-
-   public WsRelay(String p_name, int channel, Direction direction)
+   public WsRelay(String p_name, int channel)//, Direction direction)
    {
       // TODO: Need to handle direction in the output factory
       super(p_name);
-      relay = new Relay(channel, direction);
+      relay = new Relay(channel, Relay.Direction.kBoth);//, direction);
    }
 
    public void sendDataToOutput()
    {
-      Relay.Value value;
+      Relay.Value value = Relay.Value.kOff;
       
-      switch (getValue())
+      if (getValue() == WsRelayState.RELAY_ON.ordinal())
       {
-         case RELAY_ON:
-            value = Relay.Value.kOn;
-         case RELAY_FORWARD:
-            value = Relay.Value.kForward;
-         case RELAY_REVERSE:
-            value = Relay.Value.kReverse;
-         case RELAY_OFF:
-         default:
-            value = Relay.Value.kOff;
+         value = Relay.Value.kOn;
+      }
+      else if (getValue() == WsRelayState.RELAY_FORWARD.ordinal())
+      {
+         value = Relay.Value.kForward;
+      }
+      else if (getValue() == WsRelayState.RELAY_REVERSE.ordinal())
+      {
+         value = Relay.Value.kReverse;
+      }
+      else if (getValue() == WsRelayState.RELAY_OFF.ordinal())
+      {
+         value = Relay.Value.kOff;
       }
       
       relay.set((Value) value);

@@ -14,6 +14,13 @@ import org.wildstang.hardware.crio.outputs.WsServo;
 import org.wildstang.hardware.crio.outputs.WsSolenoid;
 import org.wildstang.hardware.crio.outputs.WsTalon;
 import org.wildstang.hardware.crio.outputs.WsVictor;
+import org.wildstang.hardware.crio.outputs.config.WsAnalogOutputConfig;
+import org.wildstang.hardware.crio.outputs.config.WsDigitalOutputConfig;
+import org.wildstang.hardware.crio.outputs.config.WsDoubleSolenoidConfig;
+import org.wildstang.hardware.crio.outputs.config.WsRelayConfig;
+import org.wildstang.hardware.crio.outputs.config.WsSolenoidConfig;
+import org.wildstang.hardware.crio.outputs.config.WsTalonConfig;
+import org.wildstang.hardware.crio.outputs.config.WsVictorConfig;
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Direction;
@@ -53,44 +60,46 @@ public class RoboRIOOutputFactory implements OutputFactory
       
       if (s_log.isLoggable(Level.FINE))
       {
-         s_log.fine("Creating digital output: Name = " + p_output.getName() + ", type = " + p_output.getType() + ", port = " + p_output.getPort()+ ", default = " + p_output.getDefault());
+         s_log.fine("Creating digital output: Name = " + p_output.getName() + ", type = " + p_output.getType());
       }
       
       switch ((WSOutputType)p_output.getType())
       {
          case DIGITAL_OUTPUT:
-            out = new WsDigitalOutput(p_output.getName(), (int)p_output.getPort(), (boolean)p_output.getDefault());
+            out = new WsDigitalOutput(p_output.getName(), ((WsDigitalOutputConfig)p_output.getConfig()).getChannel(), ((WsDigitalOutputConfig)p_output.getConfig()).getDefault());
             break;
          case SERVO:
-            out = new WsServo(p_output.getName(), (int)p_output.getPort(), (double)p_output.getDefault());
+            out = new WsServo(p_output.getName(), ((WsAnalogOutputConfig)p_output.getConfig()).getChannel(), ((WsAnalogOutputConfig)p_output.getConfig()).getDefault());
             break;
          case RELAY:
-        	 Relay.Direction dir;
-        	 if((double)p_output.getDefault() == 0.0)
-        	 {
-        		 dir = Relay.Direction.kReverse;
-        	 }
-        	 else if((double)p_output.getDefault() == 1.0)
-        	 {
-        		 dir = Relay.Direction.kBoth;
-        	 }
-        	 else
-        	 {
-        		 dir = Relay.Direction.kForward;
-        	 }
-            out = new WsRelay(p_output.getName(), (int)p_output.getPort(), dir);
+//        	 Relay.Direction dir;
+//        	 if((double)p_output.getDefault() == 0.0)
+//        	 {
+//        		 dir = Relay.Direction.kReverse;
+//        	 }
+//        	 else if((double)p_output.getDefault() == 1.0)
+//        	 {
+//        		 dir = Relay.Direction.kBoth;
+//        	 }
+//        	 else
+//        	 {
+//        		 dir = Relay.Direction.kForward;
+//        	 }
+            out = new WsRelay(p_output.getName(), ((WsRelayConfig)p_output.getConfig()).getChannel());//, dir);
             break;
          case VICTOR:
-            out = new WsVictor(p_output.getName(), (int)p_output.getPort(), (double)p_output.getDefault());
+            out = new WsVictor(p_output.getName(), ((WsVictorConfig)p_output.getConfig()).getChannel(), ((WsVictorConfig)p_output.getConfig()).getDefault());
             break;
          case TALON:
-            out = new WsTalon(p_output.getName(), (int)p_output.getPort(), (double)p_output.getDefault());
+            out = new WsTalon(p_output.getName(), ((WsTalonConfig)p_output.getConfig()).getChannel(), ((WsTalonConfig)p_output.getConfig()).getDefault());
             break;
          case SOLENOID_SINGLE:
-            out = new WsSolenoid(p_output.getName(), (int)p_output.getPort());
+            WsSolenoidConfig ssConfig = (WsSolenoidConfig)p_output.getConfig();
+            out = new WsSolenoid(p_output.getName(), ssConfig.getModule(), ssConfig.getChannel(), ssConfig.getDefault());
             break;
          case SOLENOID_DOUBLE:
-            out = new WsDoubleSolenoid(p_output.getName(), (int)p_output.getModule(), (int)p_output.getPort(), (int)p_output.getPort2(),((Double)p_output.getDefault()).intValue());
+            WsDoubleSolenoidConfig dsConfig = (WsDoubleSolenoidConfig)p_output.getConfig();
+            out = new WsDoubleSolenoid(p_output.getName(), dsConfig.getModule(), dsConfig.getChannel1(), dsConfig.getChannel2(), dsConfig.getDefault());
             break;
          case NULL:
          default:

@@ -90,7 +90,7 @@ public class Core
          if (output.isTrackingState())
          {
             out.setStateTracker(s_stateTracker);
-            s_stateTracker.addIOInfo(output.getName(), output.getType().toString(), "Output", output.getPort());
+            s_stateTracker.addIOInfo(output.getName(), output.getType().toString(), "Output", output.getConfig());
          }
          s_outputManager.addOutput(out);
       }
@@ -116,11 +116,10 @@ public class Core
          in = s_inputFactory.createInput(input);
    
          // Add the input to the input manager
-         //FIX LATER
-         if (!input.isTrackingState())
+         if (input.isTrackingState())
          {
             in.setStateTracker(s_stateTracker);
-            s_stateTracker.addIOInfo(input.getName(), input.getType().toString(), "Input", input.getPort());
+            s_stateTracker.addIOInfo(input.getName(), input.getType().toString(), "Input", input.getConfig());
          }
          s_inputManager.addInput(in);
       }

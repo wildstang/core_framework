@@ -13,12 +13,12 @@ import org.wildstang.hardware.crio.inputs.WsHallEffectInput;
 import org.wildstang.hardware.crio.inputs.WsJoystickAxis;
 import org.wildstang.hardware.crio.inputs.WsJoystickButton;
 import org.wildstang.hardware.crio.inputs.WsLIDAR;
+import org.wildstang.hardware.crio.inputs.config.WsAnalogInputConfig;
+import org.wildstang.hardware.crio.inputs.config.WsDigitalInputConfig;
+import org.wildstang.hardware.crio.inputs.config.WsI2CInputConfig;
+import org.wildstang.hardware.crio.inputs.config.WsJSButtonInputConfig;
+import org.wildstang.hardware.crio.inputs.config.WsJSJoystickInputConfig;
 
-
-
-
-
-import edu.wpi.first.wpilibj.I2C.Port;
 
 public class RoboRIOInputFactory implements InputFactory
 {
@@ -55,33 +55,29 @@ public class RoboRIOInputFactory implements InputFactory
       
       if (s_log.isLoggable(Level.FINE))
       {
-         s_log.fine("Creating analog input: Name = " + p_input.getName() + ", type = " + p_input.getType() + ", port = " + p_input.getPort() + ", default = " + p_input.getDefault());
+         s_log.fine("Creating analog input: Name = " + p_input.getName() + ", type = " + p_input.getType());
       }
       
       switch ((WSInputType)p_input.getType())
       {
          case POT:
-            in = new WsAnalogInput(p_input.getName(), (int)p_input.getPort(), (double)p_input.getDefault());
+            in = new WsAnalogInput(p_input.getName(), ((WsAnalogInputConfig)p_input.getConfig()).getChannel());
             break;
-         case SWITCH: 
-            in = new WsDigitalInput(p_input.getName(), (int)p_input.getPort(), (boolean)p_input.getDefault());
+         case SWITCH:
+            in = new WsDigitalInput(p_input.getName(), ((WsDigitalInputConfig)p_input.getConfig()).getChannel());
             break;
          case HALL_EFFECT:
-            // Port is the address, module is the port - such as I2C.kMXP
-            in = new WsHallEffectInput(p_input.getName(), (Port)p_input.getModule(), (int)p_input.getPort());
+            in = new WsHallEffectInput(p_input.getName(), ((WsI2CInputConfig)p_input.getConfig()).getPort(), ((WsI2CInputConfig)p_input.getConfig()).getAddress());
             break;
          case LIDAR:
             // Port is the address, module is the port - such as I2C.kMXP
-            in = new WsLIDAR(p_input.getName(), (Port)p_input.getModule(), (int)p_input.getPort());
+            in = new WsLIDAR(p_input.getName(), ((WsI2CInputConfig)p_input.getConfig()).getPort(), ((WsI2CInputConfig)p_input.getConfig()).getAddress());
             break;
          case JS_BUTTON:
-            in = new WsJoystickButton(p_input.getName(), (int)p_input.getModule(), (int)p_input.getPort());
+            in = new WsJoystickButton(p_input.getName(), ((WsJSButtonInputConfig)p_input.getConfig()).getPort(), ((WsJSButtonInputConfig)p_input.getConfig()).getButton());
             break;
          case JS_JOYSTICK:
-        	 System.out.println(p_input.getName());
-        	 System.out.println(p_input.getModule());
-        	 System.out.println(p_input.getPort());
-            in = new WsJoystickAxis(p_input.getName(), (int)p_input.getModule(), (int)p_input.getPort());
+            in = new WsJoystickAxis(p_input.getName(), ((WsJSJoystickInputConfig)p_input.getConfig()).getPort(), ((WsJSJoystickInputConfig)p_input.getConfig()).getAxis());
             break;
          case NULL:
          default:
