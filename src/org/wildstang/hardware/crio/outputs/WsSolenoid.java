@@ -17,7 +17,7 @@ public class WsSolenoid extends DigitalOutput
       super(name, p_default);
       
       solenoid = new Solenoid(module, channel1);
-      solenoid.set(false);
+      solenoid.set(p_default);
 
    }
 

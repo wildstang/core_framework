@@ -13,9 +13,9 @@ public class WsDoubleSolenoid extends DiscreteOutput
 
    DoubleSolenoid solenoid;
 
-   public WsDoubleSolenoid(String name, int module, int channel1, int channel2, int p_default)
+   public WsDoubleSolenoid(String name, int module, int channel1, int channel2, WsDoubleSolenoidState p_default)
    {
-      super(name, p_default);
+      super(name, p_default.ordinal());
 
       solenoid = new DoubleSolenoid(module, channel1, channel2);
    }
@@ -23,20 +23,21 @@ public class WsDoubleSolenoid extends DiscreteOutput
    @Override
    protected void sendDataToOutput()
    {
-      DoubleSolenoid.Value solValue;
-      switch (getValue())
+      DoubleSolenoid.Value solValue = DoubleSolenoid.Value.kOff;
+
+      if (getValue() == WsDoubleSolenoidState.FORWARD.ordinal())
       {
-         case DoubleSolenoid.Value.kForward_val:
-            solValue = DoubleSolenoid.Value.kForward;
-            break;
-         case DoubleSolenoid.Value.kReverse_val:
-            solValue = DoubleSolenoid.Value.kReverse;
-            break;
-         case DoubleSolenoid.Value.kOff_val:
-         default:
-            solValue = DoubleSolenoid.Value.kOff;
-            break;
+         solValue = DoubleSolenoid.Value.kForward;
       }
+      else if (getValue() == WsDoubleSolenoidState.REVERSE.ordinal())
+      {
+         solValue = DoubleSolenoid.Value.kReverse;
+      }
+      else if (getValue() == WsDoubleSolenoidState.OFF.ordinal())
+      {
+         solValue = DoubleSolenoid.Value.kOff;
+      }
+
       solenoid.set(solValue);
    }
    

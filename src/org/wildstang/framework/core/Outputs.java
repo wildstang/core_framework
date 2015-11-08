@@ -1,5 +1,6 @@
 package org.wildstang.framework.core;
 
+import org.wildstang.framework.hardware.OutputConfig;
 import org.wildstang.framework.io.outputs.OutputType;
 
 public interface Outputs
@@ -9,13 +10,7 @@ public interface Outputs
 
    public OutputType getType();
 
-   public Object getPort();
+   public OutputConfig getConfig();
    
-   public Object getPort2();
-
-   public Object getModule();
-
-   public Object getDefault();
-
    public boolean isTrackingState();
 }

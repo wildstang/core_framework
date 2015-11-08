@@ -1,5 +1,6 @@
 package org.wildstang.framework.core;
 
+import org.wildstang.framework.hardware.InputConfig;
 import org.wildstang.framework.io.inputs.InputType;
 
 public interface Inputs
@@ -9,13 +10,7 @@ public interface Inputs
 
    public InputType getType();
 
-   public Object getPort();
-
-   public Object getDefault();
-
-   public Object getModule();
-
-   public boolean getPullup();
+   public InputConfig getConfig();
    
    public boolean isTrackingState();
 }
