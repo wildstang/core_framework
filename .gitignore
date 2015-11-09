@@ -14,8 +14,8 @@ hs_err_pid*
 sysProps.xml
 #*.properties
 /bin/
-/build/
-/dist/
+/build/*
+/dist/*
 <<<<<<< HEAD
 
 # Build File
