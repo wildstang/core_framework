@@ -12,6 +12,7 @@ public class StateLogger implements Runnable
    private Writer m_output;
    private boolean m_infoWritten = false;
    private boolean m_firstState = true;
+   private boolean m_stateWritten = false;
    private boolean m_running = false;
    private StateTracker m_tracker;
    
@@ -137,24 +138,32 @@ public class StateLogger implements Runnable
       if (m_firstState)
       {
          builder.append("\"state\":[\n");
+         // Set flag that this has run once
          m_firstState = false;
       }
-      else if (p_stateList.size() > 0)
-      {
-         builder.append(",\n");
-      }
       
-      Iterator<StateGroup> iter = p_stateList.iterator();
-      
-      while (iter.hasNext())
+      if (p_stateList.size() > 0)
       {
-         builder.append(formatState(iter.next()));
-         if (iter.hasNext())
+         if (m_stateWritten)
          {
             builder.append(",\n");
          }
          
+         Iterator<StateGroup> iter = p_stateList.iterator();
+         
+         while (iter.hasNext())
+         {
+            builder.append(formatState(iter.next()));
+            if (iter.hasNext())
+            {
+               builder.append(",\n");
+            }
+            
+         }
+         
+         m_stateWritten = true;
       }
+
 
       // If the writer is null, don't write it
       // This is non-fatal.  If we miss a few values, it doesn't matter
