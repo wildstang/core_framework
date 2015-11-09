@@ -139,7 +139,7 @@ public class StateLogger implements Runnable
          builder.append("\"state\":[\n");
          m_firstState = false;
       }
-      else
+      else if (p_stateList.size() > 0)
       {
          builder.append(",\n");
       }

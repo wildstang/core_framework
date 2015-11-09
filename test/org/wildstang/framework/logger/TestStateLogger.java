@@ -43,11 +43,11 @@ public class TestStateLogger extends BaseTest
       // Create IOSet and StateGroup
       for (Inputs in : DummyInputs.values())
       {
-         ioSet.addIOInfo(in.getName(), in.getType().toString(), "Input", in.getPort());
+         ioSet.addIOInfo(in.getName(), in.getType().toString(), "Input", in.getConfig());
       }
       for (Outputs out : DummyOutputs.values())
       {
-         ioSet.addIOInfo(out.getName(), out.getType().toString(), "Output", out.getPort());
+         ioSet.addIOInfo(out.getName(), out.getType().toString(), "Output", out.getConfig());
       }
       
       group = new StateGroup(new Date());

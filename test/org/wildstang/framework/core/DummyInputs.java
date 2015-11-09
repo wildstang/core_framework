@@ -12,9 +12,6 @@ public enum DummyInputs implements Inputs
    
    private final String m_name;
    private final InputType m_type;
-   private final String m_port;
-   private Object m_default;
-   private Object m_module;
    private boolean m_trackingState;
    private boolean m_pullup;
 
@@ -22,8 +19,6 @@ public enum DummyInputs implements Inputs
    {
       m_name = p_name;
       m_type = p_type;
-      m_port = p_port;
-      m_default = p_default;
       m_trackingState = p_trackingState;
       m_pullup = p_pullup;
    }
@@ -32,8 +27,6 @@ public enum DummyInputs implements Inputs
    {
       m_name = p_name;
       m_type = p_type;
-      m_port = p_port;
-      m_default = p_default;
       m_trackingState = p_trackingState;
    }
    
@@ -48,27 +41,7 @@ public enum DummyInputs implements Inputs
    {
       return m_type;
    }
-   
-   @Override
-   public Object getPort()
-   {
-      return m_port;
-   }
 
-   @Override
-   public Object getDefault()
-   {
-      return m_default;
-   }
-
-   @Override
-   public Object getModule()
-   {
-      return m_module;
-   }
-   
-   
-   
    public boolean getPullup()
    {
       return m_pullup;
