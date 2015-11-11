@@ -11,6 +11,7 @@ import org.wildstang.framework.hardware.InputFactory;
 import org.wildstang.framework.hardware.OutputFactory;
 import org.wildstang.framework.io.*;
 import org.wildstang.framework.logger.StateTracker;
+import org.wildstang.framework.subsystems.Subsystem;
 import org.wildstang.framework.subsystems.SubsystemManager;
 
 
@@ -62,10 +63,10 @@ public class Core
       s_stateTracker = new StateTracker();
       s_stateTracker.init();
       
-      s_inputFactory = (InputFactory)createFactory(m_inputFactoryClass);
+      s_inputFactory = (InputFactory)createObject(m_inputFactoryClass);
       s_inputFactory.init();
       
-      s_outputFactory = (OutputFactory)createFactory(m_outputFactoryClass);
+      s_outputFactory = (OutputFactory)createObject(m_outputFactoryClass);
       s_outputFactory.init();
    }
    
@@ -127,6 +128,32 @@ public class Core
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "createInputs");
    }
 
+   
+   public void createSubsystems(Subsystems[] p_subsystems)
+   {
+      if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "createSubsystems");
+      
+      Subsystem sub = null;
+   
+      // Iterate over all input enum values and create a subsystem for each
+      for (Subsystems subsystem : p_subsystems)
+      {
+         if (s_log.isLoggable(Level.FINE))
+         {
+            s_log.fine("Creating subsystem: " + subsystem.getName());
+         }
+   
+         // Instantiate the class
+         sub = (Subsystem)createObject(subsystem.getSubsystemClass());
+         
+         // Call the init method
+         sub.init();
+   
+         s_subsystemManager.addSubsystem(sub);
+      }
+   
+      if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "createSubsystems");
+   }
 
    public static IInputManager getInputManager()
    {
@@ -155,7 +182,7 @@ public class Core
    }
 
 
-   protected Object createFactory(Class p_class)
+   protected Object createObject(Class p_class)
    {
       CoreUtils.checkNotNull(p_class, "p_class is null");
       

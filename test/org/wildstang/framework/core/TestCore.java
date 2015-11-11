@@ -183,7 +183,7 @@ public class TestCore extends BaseTest
       configureLogging();
       replayAll();
 
-      Object o = core.createFactory(String.class);
+      Object o = core.createObject(String.class);
       assertTrue(o instanceof String);
    }
 
@@ -194,7 +194,7 @@ public class TestCore extends BaseTest
       configureLogging();
       replayAll();
 
-      Object o = core.createFactory(null);
+      Object o = core.createObject(null);
       assertTrue(o instanceof String);
    }
 
