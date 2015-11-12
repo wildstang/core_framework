@@ -22,7 +22,7 @@ public class WsVictor extends AnalogOutput
    }
 
 
-   public void sendDataToOutput()
+   protected void sendDataToOutput()
    {
       victor.set(getValue());
    }
