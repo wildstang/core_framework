@@ -88,7 +88,7 @@ public abstract class AbstractInput implements Input
       return copy;
    }
 
-   private void notifyListeners()
+   protected void notifyListeners()
    {
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "notifyListeners");
 
@@ -131,6 +131,16 @@ public abstract class AbstractInput implements Input
       }
       readDataFromInput();
 
+      logCurrentState();
+      
+      // Notify any listeners
+      notifyListeners();
+
+      if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "update");
+   }
+
+   protected void logCurrentState()
+   {
       // Log any state information
       if (m_stateTracker != null)
       {
@@ -138,13 +148,8 @@ public abstract class AbstractInput implements Input
          {
             s_log.finer("Logging input state");
          }
-         logCurrentState();
+         logCurrentStateInternal();
       }
-      
-      // Notify any listeners
-      notifyListeners();
-
-      if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "update");
    }
 
    public String getName()
@@ -162,9 +167,8 @@ public abstract class AbstractInput implements Input
    {
       return m_valueChanged;
    }
-
    
-   protected abstract void logCurrentState();
+   protected abstract void logCurrentStateInternal();
    
    protected abstract void readDataFromInput();
 
