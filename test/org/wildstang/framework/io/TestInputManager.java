@@ -6,6 +6,8 @@ package org.wildstang.framework.io;
 import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
 
+import java.util.NoSuchElementException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -357,7 +359,7 @@ public class TestInputManager extends BaseTest
    }      
       
 
-   @Test
+   @Test(expected=NoSuchElementException.class)
    public void testGetInputDoesntExist()
    {
       // 3. Call get with input that does not exist in the manager

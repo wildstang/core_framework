@@ -30,7 +30,7 @@ public abstract class DigitalInput extends AbstractInput
    public DigitalInput(String p_name, boolean p_default)
    {
       super(p_name);
-      setCurrentValue(p_default);
+      m_currentValue = p_default;
    }
 
    @Override
@@ -39,12 +39,6 @@ public abstract class DigitalInput extends AbstractInput
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "readDataFromInput");
 
       boolean newValue = readRawValue();
-
-      // Only update if the value has changed
-      if (s_log.isLoggable(Level.FINEST))
-      {
-         s_log.finest("Current value = " + m_currentValue + " : New value = " + newValue);
-      }
 
       if (m_debounced)
       {
@@ -63,27 +57,51 @@ public abstract class DigitalInput extends AbstractInput
          // If the value has held long enough, set the new value
          if (m_cyclesOnCurrentValue >= DEBOUNCE_CYCLES)
          {
-            setCurrentValue(newValue);
-            setValueChanged(true);
+            setNewValue(newValue);
          }
       }
       else
       {
-         if (newValue != m_currentValue)
-         {
-            setCurrentValue(newValue);
-            setValueChanged(true);
-         }
+         setNewValue(newValue);
       }
       
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "readDataFromInput");
    }
 
-   protected void setCurrentValue(boolean p_value)
+   public void setValue(boolean p_newValue)
    {
-      m_currentValue = p_value;
+      if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "setValue");
+
+      setNewValue(p_newValue);
+      
+      logCurrentState();
+      
+      notifyListeners();
+
+      if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "setValue");
    }
 
+   private void setNewValue(boolean p_newValue)
+   {
+      // Only update if the value has changed
+      if (s_log.isLoggable(Level.FINEST))
+      {
+         s_log.finest("Current value = " + m_currentValue + " : New value = " + p_newValue);
+      }
+
+      if (p_newValue != m_currentValue)
+      {
+         m_currentValue = p_newValue;
+         setValueChanged(true);
+      }
+      else
+      {
+         setValueChanged(false);
+      }
+   }
+
+   
+   
    protected abstract boolean readRawValue();
    
    public boolean getValue()
@@ -92,7 +110,7 @@ public abstract class DigitalInput extends AbstractInput
    }
    
    @Override
-   protected void logCurrentState()
+   protected void logCurrentStateInternal()
    {
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "logCurrentState");
 

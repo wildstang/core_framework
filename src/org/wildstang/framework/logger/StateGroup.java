@@ -1,13 +1,13 @@
 package org.wildstang.framework.logger;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class StateGroup
 {
    
    private Date m_timestamp;
-   private ArrayList<StateInfo> m_stateList = new ArrayList<StateInfo>();
+   private HashMap<String, StateInfo> m_stateList = new HashMap<String, StateInfo>();
    
    public StateGroup(Date p_timestamp)
    {
@@ -17,7 +17,7 @@ public class StateGroup
    public void addState(String p_name, String p_parent, Object p_value)
    {
       StateInfo state = new StateInfo(p_name, p_parent, p_value);
-      m_stateList.add(state);
+      m_stateList.put(p_name, state);
    }
 
    public Date getTimestamp()
@@ -25,7 +25,7 @@ public class StateGroup
       return m_timestamp;
    }
 
-   public ArrayList<StateInfo> getStateList()
+   public HashMap<String, StateInfo> getStateList()
    {
       return m_stateList;
    }

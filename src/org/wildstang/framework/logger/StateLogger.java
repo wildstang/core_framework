@@ -214,7 +214,7 @@ public class StateLogger implements Runnable
       builder.append(p_group.getTimestamp().getTime());
       builder.append("\",\n\t\t\"values\":[\n");
 
-      Iterator<StateInfo> iter = p_group.getStateList().iterator();
+      Iterator<StateInfo> iter = p_group.getStateList().values().iterator();
       StateInfo temp;
       
       while (iter.hasNext())

@@ -22,7 +22,7 @@ public abstract class AnalogInput extends AbstractInput
    public AnalogInput(String p_name, double p_default)
    {
       super(p_name);
-      setCurrentValue(p_default);
+      m_currentValue = p_default;
    }
 
    @Override
@@ -32,31 +32,46 @@ public abstract class AnalogInput extends AbstractInput
 
       double newValue = readRawValue();
 
+      setNewValue(newValue);
+
+      if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "readDataFromInput");
+   }
+
+   public void setValue(double p_newValue)
+   {
+      if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "setValue");
+
+      setNewValue(p_newValue);
+      
+      logCurrentState();
+      
+      notifyListeners();
+
+      if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "setValue");
+   }
+
+   private void setNewValue(double p_newValue)
+   {
       // Only update if the value has changed
       // NOTE: For analog inputs, it is possible to change often due to noise
       // or sensitive sensors. May want to implement a tolerance/sensitivity
       // on value changes
       if (s_log.isLoggable(Level.FINEST))
       {
-         s_log.finest("Current value = " + m_currentValue + " : New value = " + newValue);
+         s_log.finest("Current value = " + m_currentValue + " : New value = " + p_newValue);
       }
-      if (newValue != m_currentValue)
+
+      if (p_newValue != m_currentValue)
       {
-         setCurrentValue(newValue);
+         m_currentValue = p_newValue;
          setValueChanged(true);
       }
       else
       {
          setValueChanged(false);
       }
-
-      if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "readDataFromInput");
    }
-
-   protected void setCurrentValue(double p_value)
-   {
-      m_currentValue = p_value;
-   }
+   
 
    /**
     * This method reads the raw value from the underlying hardware. This should
@@ -72,12 +87,12 @@ public abstract class AnalogInput extends AbstractInput
    }
 
    @Override
-   protected void logCurrentState()
+   protected void logCurrentStateInternal()
    {
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "logCurrentState");
 
       getStateTracker().addState(getName(), getName(), s_format.format(getValue()));
-//      StateManager.getInstance().addState(getName(), getParent() == null ? getName() : getParent().getName(), getValue());
+//      getStateTracker().addState(getName(), getParent() == null ? getName() : getParent().getName(), getValue());
       
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "logCurrentState");
    }

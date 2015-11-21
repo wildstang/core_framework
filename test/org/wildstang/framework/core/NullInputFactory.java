@@ -24,11 +24,11 @@ public class NullInputFactory implements InputFactory
       switch ((DummyInputType)p_input.getType())
       {
          case POT:
-            in = new NullAnalogInput(p_input.getName(), (double)p_input.getDefault());
+            in = new NullAnalogInput(p_input.getName(), (double)((DummyInputConfig)p_input.getConfig()).getDouble());
             break;
          case NULL:
          default:
-            in = new NullDigitalInput(p_input.getName(), (boolean)p_input.getDefault());
+            in = new NullDigitalInput(p_input.getName(), (boolean)((DummyInputConfig)p_input.getConfig()).getBoolean());
             break;
       }
       

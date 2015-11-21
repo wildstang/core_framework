@@ -2,60 +2,27 @@ package org.wildstang.framework.core;
 
 
 import org.wildstang.framework.core.Outputs;
+import org.wildstang.framework.hardware.OutputConfig;
 import org.wildstang.framework.io.outputs.OutputType;
 
 public enum DummyOutputs implements Outputs
 {
-   TEST1("Test1",      DummyOutputType.SERVO,       "", 5.5, false),
-   TEST2("Test2",      DummyOutputType.NULL,       "", true, false),
-   TEST3("Test3",      DummyOutputType.SERVO,       "", 5.5, true),
-   TEST4("Test4",      DummyOutputType.NULL,       "", true, true);
+   TEST1("Test1",      DummyOutputType.SERVO,      new DummyOutputConfig(5.5), false),
+   TEST2("Test2",      DummyOutputType.NULL,       new DummyOutputConfig(true), false),
+   TEST3("Test3",      DummyOutputType.SERVO,      new DummyOutputConfig(5.5), true),
+   TEST4("Test4",      DummyOutputType.NULL,       new DummyOutputConfig(false), true);
 
 
    private final String m_name;
    private final OutputType m_type;
-   private final Object m_port;
-   private final Object m_port2;
-   private Object m_default;
-   private Object m_module;
+   private OutputConfig m_config;
    private boolean m_trackingState;
 
-   DummyOutputs(String p_name, OutputType p_type, String p_port, boolean p_trackingState)
+   DummyOutputs(String p_name, OutputType p_type, OutputConfig p_config, boolean p_trackingState)
    {
       m_name = p_name;
       m_type = p_type;
-      m_port = p_port;
-      m_port2 = null;
-      m_trackingState = p_trackingState;
-   }
-   
-   DummyOutputs(String p_name, OutputType p_type, String p_port, boolean p_default, boolean p_trackingState)
-   {
-      m_name = p_name;
-      m_type = p_type;
-      m_port = p_port;
-      m_port2 = null;
-      m_default = p_default;
-      m_trackingState = p_trackingState;
-   }
-   
-   DummyOutputs(String p_name, OutputType p_type, String p_port, double p_default, boolean p_trackingState)
-   {
-      m_name = p_name;
-      m_type = p_type;
-      m_port = p_port;
-      m_port2 = null;
-      m_default = p_default;
-      m_trackingState = p_trackingState;
-   }
-   
-   DummyOutputs(String p_name, OutputType p_type, String p_port, String p_port2, double p_default, boolean p_trackingState)
-   {
-      m_name = p_name;
-      m_type = p_type;
-      m_port = p_port;
-      m_port2 = p_port2;
-      m_default = p_default;
+      m_config = p_config;
       m_trackingState = p_trackingState;
    }
    
@@ -71,28 +38,9 @@ public enum DummyOutputs implements Outputs
       return m_type;
    }
    
-   @Override
-   public Object getPort()
+   public OutputConfig getConfig()
    {
-      return m_port;
-   }
-   
-   @Override
-   public Object getPort2()
-   {
-      return m_port2;
-   }
-   
-   @Override
-   public Object getDefault()
-   {
-      return m_default;
-   }
-
-   @Override
-   public Object getModule()
-   {
-      return m_module;
+      return m_config;
    }
 
    public boolean isTrackingState()

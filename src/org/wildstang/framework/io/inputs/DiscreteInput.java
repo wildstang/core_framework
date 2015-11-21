@@ -19,7 +19,7 @@ public abstract class DiscreteInput extends AbstractInput
    public DiscreteInput(String p_name, int p_default)
    {
       super(p_name);
-      setCurrentValue(p_default);
+      m_currentValue = p_default;
    }
 
    @Override
@@ -29,23 +29,40 @@ public abstract class DiscreteInput extends AbstractInput
 
       int newValue = readRawValue();
 
-      // Only update if the value has changed
-      if (s_log.isLoggable(Level.FINEST))
-      {
-         s_log.finest("Current value = " + m_currentValue + " : New value = " + newValue);
-      }
-      if (newValue != m_currentValue)
-      {
-         setCurrentValue(newValue);
-         setValueChanged(true);
-      }
+      setNewValue(newValue);
 
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "readDataFromInput");
    }
 
-   protected void setCurrentValue(int p_value)
+   public void setValue(int p_newValue)
    {
-      m_currentValue = p_value;
+      if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "setValue");
+
+      setNewValue(p_newValue);
+      
+      logCurrentState();
+      
+      notifyListeners();
+
+      if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "setValue");
+   }
+
+   private void setNewValue(int p_newValue)
+   {
+      // Only update if the value has changed
+      if (s_log.isLoggable(Level.FINEST))
+      {
+         s_log.finest("Current value = " + m_currentValue + " : New value = " + p_newValue);
+      }
+      if (p_newValue != m_currentValue)
+      {
+         m_currentValue = p_newValue;
+         setValueChanged(true);
+      }
+      else
+      {
+         setValueChanged(false);
+      }
    }
 
    protected abstract int readRawValue();
@@ -56,7 +73,7 @@ public abstract class DiscreteInput extends AbstractInput
    }
 
    @Override
-   protected void logCurrentState()
+   protected void logCurrentStateInternal()
    {
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "logCurrentState");
 

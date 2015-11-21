@@ -51,7 +51,7 @@ public abstract class ImageInput extends AbstractInput
    }
    
    @Override
-   protected void logCurrentState()
+   protected void logCurrentStateInternal()
    {
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "logCurrentState");
 

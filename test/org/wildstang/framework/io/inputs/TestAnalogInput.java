@@ -1,6 +1,7 @@
 package org.wildstang.framework.io.inputs;
 
 import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
 
 import java.util.Date;
 
@@ -28,6 +29,7 @@ public class TestAnalogInput extends BaseTest
    public void setUp() throws Exception
    {
       super.setUp();
+      setLoggingState(false);
       mockListener = createMock(InputListener.class);
       mockStateTracker = createNiceMock(StateTracker.class);
 
@@ -63,6 +65,54 @@ public class TestAnalogInput extends BaseTest
 
       // 2. Test that when not holding the value hasValueChanged returns true
       testRead(false);
+   }
+
+   @Test
+   public void testSetValue()
+   {
+      // TESTS
+      // 1. Test that when value hasn't changed, read value is same as default value
+      // 2. Test that when not holding the value hasValueChanged returns true
+
+      // 1. Test that when value hasn't changed, read value is same as default value
+      randomInput = new RandomAnalogInput(TEST_INPUT_NAME, 5.5);
+
+      resetAll();
+      configureLogging();
+      mockListener.inputUpdate(randomInput);
+      expectLastCall().times(2);
+      replayAll();
+      
+      randomInput.setStateTracker(mockStateTracker);
+      randomInput.holdValue(false);
+      randomInput.addInputListener(mockListener);
+
+      randomInput.update();
+      
+      // TODO: Check that we log to the state tracker etc when we set the value
+      randomInput.setValue(7.9);
+      
+      verifyAll();
+      
+      // If we're holding, the value should not have changed
+      assertTrue(randomInput.hasValueChanged());
+      assertEquals(7.9, randomInput.getValue(), 0.001);
+      
+//-----------------------------------------
+
+      // 2. Test that when not holding the value hasValueChanged returns true
+//      resetAll();
+//      configureLogging();
+//      replayAll();
+//
+//      randomInput = new RandomAnalogInput(TEST_INPUT_NAME, 5.5);
+//      randomInput.setStateTracker(mockStateTracker);
+//      randomInput.holdValue(false);
+//      
+//      randomInput.readDataFromInput();
+//      
+//      // If we're holding, the value should not have changed
+//      assertTrue(randomInput.hasValueChanged());
    }
 
    private void testRead(boolean hold)
