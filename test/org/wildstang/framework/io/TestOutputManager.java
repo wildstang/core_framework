@@ -3,6 +3,8 @@ package org.wildstang.framework.io;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
+import java.util.NoSuchElementException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -78,7 +80,6 @@ public class TestOutputManager extends BaseTest
       // 2. Call update with multiple Outputs added to manager
       resetAll();
       Output mockOutput2 = createNiceMock(Output.class);
-      manager.addOutput(mockOutput2);
       
       configureLogging();
       expect(mockOutput2.getName()).andReturn("TestOutput2").anyTimes();
@@ -89,6 +90,7 @@ public class TestOutputManager extends BaseTest
       mockOutput2.update();
       expectLastCall().times(1);
       replayAll();
+      manager.addOutput(mockOutput2);
 
       assertEquals(2, manager.size());
       
@@ -340,8 +342,17 @@ public class TestOutputManager extends BaseTest
 //-----------------------------------------
 
       // 3. Call get with output that does not exist in the manager
-      result = manager.getOutput("TestInpout");
-      assertNull(result);
+      thrown = false;
+      try
+      {
+         result = manager.getOutput("TestInpout");
+      }
+      catch (NoSuchElementException e)
+      {
+         thrown = true;
+      }
+
+      assertTrue(thrown);
       
       // validate number of outputs
       assertEquals(1, manager.size());

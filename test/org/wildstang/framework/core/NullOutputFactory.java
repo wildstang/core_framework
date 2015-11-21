@@ -25,11 +25,11 @@ public class NullOutputFactory implements OutputFactory
       switch ((DummyOutputType)p_output.getType())
       {
          case SERVO:
-            out = new NullAnalogOutput(p_output.getName(), (double)p_output.getDefault());
+            out = new NullAnalogOutput(p_output.getName(), (double)((DummyOutputConfig)p_output.getConfig()).getDouble());
             break;
          case NULL:
          default:
-            out = new NullDigitalOutput(p_output.getName(), (boolean)p_output.getDefault());
+            out = new NullDigitalOutput(p_output.getName(), (boolean)((DummyOutputConfig)p_output.getConfig()).getBoolean());
             break;
       }
       
