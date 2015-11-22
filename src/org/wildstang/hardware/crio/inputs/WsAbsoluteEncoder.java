@@ -15,7 +15,10 @@ public class WsAbsoluteEncoder extends WsAnalogInput
    {
       double rawValue = super.readRawValue();
       
-      double position = (rawValue / m_maxVoltage) * 360;
+//      double position = (rawValue / m_maxVoltage) * 360;
+
+      // TODO: Only for testing with a multi-turn pot.. remove this and replace with above line later!
+      double position = (double)((int)((rawValue / m_maxVoltage) * 360 * 5) % 360);
       
       return position;
    }
