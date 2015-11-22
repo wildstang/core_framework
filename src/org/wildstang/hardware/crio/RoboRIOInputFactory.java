@@ -7,12 +7,14 @@ import org.wildstang.framework.core.Inputs;
 import org.wildstang.framework.hardware.InputFactory;
 import org.wildstang.framework.io.Input;
 import org.wildstang.hardware.crio.inputs.WSInputType;
+import org.wildstang.hardware.crio.inputs.WsAbsoluteEncoder;
 import org.wildstang.hardware.crio.inputs.WsAnalogInput;
 import org.wildstang.hardware.crio.inputs.WsDigitalInput;
 import org.wildstang.hardware.crio.inputs.WsHallEffectInput;
 import org.wildstang.hardware.crio.inputs.WsJoystickAxis;
 import org.wildstang.hardware.crio.inputs.WsJoystickButton;
 import org.wildstang.hardware.crio.inputs.WsLIDAR;
+import org.wildstang.hardware.crio.inputs.config.WsAbsoluteEncoderConfig;
 import org.wildstang.hardware.crio.inputs.config.WsAnalogInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsDigitalInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsI2CInputConfig;
@@ -64,7 +66,10 @@ public class RoboRIOInputFactory implements InputFactory
             in = new WsAnalogInput(p_input.getName(), ((WsAnalogInputConfig)p_input.getConfig()).getChannel());
             break;
          case SWITCH:
-            in = new WsDigitalInput(p_input.getName(), ((WsDigitalInputConfig)p_input.getConfig()).getChannel());
+            in = new WsDigitalInput(p_input.getName(), ((WsDigitalInputConfig)p_input.getConfig()).getChannel(), ((WsDigitalInputConfig)p_input.getConfig()).getPullup());
+            break;
+         case ABSOLUTE_ENCODER:
+            in = new WsAbsoluteEncoder(p_input.getName(), ((WsAbsoluteEncoderConfig)p_input.getConfig()).getChannel(), ((WsAbsoluteEncoderConfig)p_input.getConfig()).getMaxVoltage());
             break;
          case HALL_EFFECT:
             in = new WsHallEffectInput(p_input.getName(), ((WsI2CInputConfig)p_input.getConfig()).getPort(), ((WsI2CInputConfig)p_input.getConfig()).getAddress());

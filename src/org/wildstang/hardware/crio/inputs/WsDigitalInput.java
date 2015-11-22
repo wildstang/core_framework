@@ -10,18 +10,27 @@ public class WsDigitalInput extends org.wildstang.framework.io.inputs.DigitalInp
 {
 
    DigitalInput input;
+   private boolean m_pullup = false;
 
    // By giving the input number in the constructor we can make this generic
    // for all digital inputs
-   public WsDigitalInput(String p_name, int channel)
+   public WsDigitalInput(String p_name, int channel, boolean p_pullup)
    {
       super(p_name);
+      m_pullup = p_pullup;
 
       this.input = new DigitalInput(channel);
    }
 
    public boolean readRawValue()
    {
-      return input.get();
+      if (m_pullup)
+      {
+         return !input.get();
+      }
+      else
+      {
+         return input.get();
+      }
    }
 }

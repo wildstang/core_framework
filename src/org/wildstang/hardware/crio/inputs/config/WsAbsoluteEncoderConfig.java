@@ -2,15 +2,15 @@ package org.wildstang.hardware.crio.inputs.config;
 
 import org.wildstang.framework.hardware.InputConfig;
 
-public class WsDigitalInputConfig implements InputConfig
+public class WsAbsoluteEncoderConfig implements InputConfig
 {
    private int m_channel = 0;
-   private boolean m_pullup = false;
+   private int m_maxVoltage = 0;
    
-   public WsDigitalInputConfig(int channel, boolean p_pullup)
+   public WsAbsoluteEncoderConfig(int channel, int p_maxVoltage)
    {
       m_channel = channel;
-      m_pullup = p_pullup;
+      m_maxVoltage = p_maxVoltage;
    }
 
    public int getChannel()
@@ -18,11 +18,10 @@ public class WsDigitalInputConfig implements InputConfig
       return m_channel;
    }
 
-   public boolean getPullup()
+   public int getMaxVoltage()
    {
-      return m_pullup;
+      return m_maxVoltage;
    }
    
    
-
 }
