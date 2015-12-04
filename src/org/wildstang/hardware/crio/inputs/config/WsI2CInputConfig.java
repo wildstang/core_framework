@@ -25,6 +25,19 @@ public class WsI2CInputConfig implements InputConfig
       return m_address;
    }
 
+   @Override
+   public String toString()
+   {
+      StringBuffer buf = new StringBuffer();
+      
+      buf.append("{\"port\": ");
+      buf.append(m_port);
+      buf.append(",\"address\": ");
+      buf.append(Integer.toHexString(m_address));
+      buf.append("}");
+      
+      return buf.toString();
+   }
    
    
 }

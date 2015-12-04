@@ -30,6 +30,19 @@ public class WsSolenoidConfig implements OutputConfig
       return m_module;
    }
    
+   @Override
+   public String toString()
+   {
+      StringBuffer buf = new StringBuffer();
+      
+      buf.append("{\"module\": ");
+      buf.append(m_module);
+      buf.append(", \"channel\": ");
+      buf.append(m_channel);
+      buf.append("}");
+
+      return buf.toString();
+   }
    
 
 }

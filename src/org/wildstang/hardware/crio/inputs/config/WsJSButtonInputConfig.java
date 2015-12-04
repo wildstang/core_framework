@@ -23,6 +23,20 @@ public class WsJSButtonInputConfig implements InputConfig
       return m_button;
    }
 
+   @Override
+   public String toString()
+   {
+      StringBuffer buf = new StringBuffer();
+      
+      buf.append("{\"port\": ");
+      buf.append(m_port);
+      buf.append(",\"button\": ");
+      buf.append(m_button);
+      buf.append("}");
+      
+      return buf.toString();
+   }
+   
    
    
 }

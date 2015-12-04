@@ -23,6 +23,17 @@ public class WsVictorConfig implements OutputConfig
       return m_default;
    }
    
+   @Override
+   public String toString()
+   {
+      StringBuffer buf = new StringBuffer();
+      
+      buf.append("{\"channel\": ");
+      buf.append(m_channel);
+      buf.append("}");
+      
+      return buf.toString();
+   }
    
 
 }

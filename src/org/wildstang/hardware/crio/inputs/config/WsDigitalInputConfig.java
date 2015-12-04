@@ -23,6 +23,18 @@ public class WsDigitalInputConfig implements InputConfig
       return m_pullup;
    }
    
+   @Override
+   public String toString()
+   {
+      StringBuffer buf = new StringBuffer();
+      
+      buf.append("{\"channel\": ");
+      buf.append(m_channel);
+      buf.append(",\"pullup\": ");
+      buf.append(m_pullup);
+      buf.append("}");
+      
+      return buf.toString();
+   }
    
-
 }

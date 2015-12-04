@@ -22,6 +22,19 @@ public class WsAbsoluteEncoderConfig implements InputConfig
    {
       return m_maxVoltage;
    }
-   
+
+   @Override
+   public String toString()
+   {
+      StringBuffer buf = new StringBuffer();
+      
+      buf.append("{\"channel\": ");
+      buf.append(m_channel);
+      buf.append(",\"maxVoltage\": ");
+      buf.append(m_maxVoltage);
+      buf.append("}");
+      
+      return buf.toString();
+   }
    
 }

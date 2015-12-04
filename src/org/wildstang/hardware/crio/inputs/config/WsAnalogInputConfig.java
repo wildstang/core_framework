@@ -16,5 +16,15 @@ public class WsAnalogInputConfig implements InputConfig
       return m_channel;
    }
    
-   
+   @Override
+   public String toString()
+   {
+      StringBuffer buf = new StringBuffer();
+      
+      buf.append("{\"channel\": ");
+      buf.append(m_channel);
+      buf.append("}");
+      
+      return buf.toString();
+   }
 }

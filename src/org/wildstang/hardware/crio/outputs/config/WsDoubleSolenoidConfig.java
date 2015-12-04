@@ -37,6 +37,22 @@ public class WsDoubleSolenoidConfig implements OutputConfig
    {
       return m_module;
    }
+
+   @Override
+   public String toString()
+   {
+      StringBuffer buf = new StringBuffer();
+      
+      buf.append("{\"module\": ");
+      buf.append(m_module);
+      buf.append(", \"channel1\": ");
+      buf.append(m_channel1);
+      buf.append(",\"channel2\": ");
+      buf.append(m_channel2);
+      buf.append("}");
+      
+      return buf.toString();
+   }
    
    
 

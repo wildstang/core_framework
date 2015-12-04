@@ -23,6 +23,18 @@ public class WsJSJoystickInputConfig implements InputConfig
       return m_axis;
    }
 
-   
+   @Override
+   public String toString()
+   {
+      StringBuffer buf = new StringBuffer();
+      
+      buf.append("{\"port\": ");
+      buf.append(m_port);
+      buf.append(",\"axis\": ");
+      buf.append(m_axis);
+      buf.append("}");
+      
+      return buf.toString();
+   }
    
 }
