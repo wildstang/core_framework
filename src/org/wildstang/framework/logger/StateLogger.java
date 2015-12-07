@@ -253,9 +253,19 @@ public class StateLogger implements Runnable
       builder.append(p_info.getType());
       builder.append("\",\"direction\":\"");
       builder.append(p_info.getDirection());
-      builder.append("\",\"port\":\"");
-      builder.append(p_info.getPort());
-      builder.append("\"}");
+      builder.append("\",\"port\":");
+      
+      Object portInfo = p_info.getPort();
+      if (portInfo == null)
+      {
+         builder.append("{}");
+      }
+      else
+      {
+         builder.append(portInfo);
+      }
+      
+      builder.append("}");
       
       return builder.toString();
    }

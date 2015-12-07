@@ -30,9 +30,9 @@ public class WsI2CInputConfig implements InputConfig
    {
       StringBuffer buf = new StringBuffer();
       
-      buf.append("{\"port\": ");
+      buf.append("{\"port\": \"");
       buf.append(m_port);
-      buf.append(",\"address\": ");
+      buf.append("\",\"address\": ");
       buf.append(Integer.toHexString(m_address));
       buf.append("}");
       
