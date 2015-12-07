@@ -30,9 +30,9 @@ public class WsDigitalInputConfig implements InputConfig
       
       buf.append("{\"channel\": ");
       buf.append(m_channel);
-      buf.append(",\"pullup\": ");
+      buf.append(",\"pullup\": \"");
       buf.append(m_pullup);
-      buf.append("}");
+      buf.append("\"}");
       
       return buf.toString();
    }
