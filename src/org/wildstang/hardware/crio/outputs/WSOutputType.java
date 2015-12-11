@@ -11,6 +11,7 @@ public enum WSOutputType implements OutputType
    VICTOR("Victor"),
    TALON("Talon"),
    RELAY("Relay"),
+   I2C("I2C"),
    NULL("Null");
 
    private String m_typeStr;
