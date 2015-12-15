@@ -9,6 +9,7 @@ import org.wildstang.framework.io.Output;
 import org.wildstang.hardware.crio.outputs.WSOutputType;
 import org.wildstang.hardware.crio.outputs.WsDigitalOutput;
 import org.wildstang.hardware.crio.outputs.WsDoubleSolenoid;
+import org.wildstang.hardware.crio.outputs.WsI2COutput;
 import org.wildstang.hardware.crio.outputs.WsRelay;
 import org.wildstang.hardware.crio.outputs.WsServo;
 import org.wildstang.hardware.crio.outputs.WsSolenoid;
@@ -17,6 +18,7 @@ import org.wildstang.hardware.crio.outputs.WsVictor;
 import org.wildstang.hardware.crio.outputs.config.WsAnalogOutputConfig;
 import org.wildstang.hardware.crio.outputs.config.WsDigitalOutputConfig;
 import org.wildstang.hardware.crio.outputs.config.WsDoubleSolenoidConfig;
+import org.wildstang.hardware.crio.outputs.config.WsI2COutputConfig;
 import org.wildstang.hardware.crio.outputs.config.WsRelayConfig;
 import org.wildstang.hardware.crio.outputs.config.WsSolenoidConfig;
 import org.wildstang.hardware.crio.outputs.config.WsTalonConfig;
@@ -72,20 +74,7 @@ public class RoboRIOOutputFactory implements OutputFactory
             out = new WsServo(p_output.getName(), ((WsAnalogOutputConfig)p_output.getConfig()).getChannel(), ((WsAnalogOutputConfig)p_output.getConfig()).getDefault());
             break;
          case RELAY:
-//        	 Relay.Direction dir;
-//        	 if((double)p_output.getDefault() == 0.0)
-//        	 {
-//        		 dir = Relay.Direction.kReverse;
-//        	 }
-//        	 else if((double)p_output.getDefault() == 1.0)
-//        	 {
-//        		 dir = Relay.Direction.kBoth;
-//        	 }
-//        	 else
-//        	 {
-//        		 dir = Relay.Direction.kForward;
-//        	 }
-            out = new WsRelay(p_output.getName(), ((WsRelayConfig)p_output.getConfig()).getChannel());//, dir);
+            out = new WsRelay(p_output.getName(), ((WsRelayConfig)p_output.getConfig()).getChannel());
             break;
          case VICTOR:
             out = new WsVictor(p_output.getName(), ((WsVictorConfig)p_output.getConfig()).getChannel(), ((WsVictorConfig)p_output.getConfig()).getDefault());
@@ -100,6 +89,9 @@ public class RoboRIOOutputFactory implements OutputFactory
          case SOLENOID_DOUBLE:
             WsDoubleSolenoidConfig dsConfig = (WsDoubleSolenoidConfig)p_output.getConfig();
             out = new WsDoubleSolenoid(p_output.getName(), dsConfig.getModule(), dsConfig.getChannel1(), dsConfig.getChannel2(), dsConfig.getDefault());
+            break;
+         case I2C:
+            out = new WsI2COutput(p_output.getName(), ((WsI2COutputConfig)p_output.getConfig()).getPort(), ((WsI2COutputConfig)p_output.getConfig()).getAddress());
             break;
          case NULL:
          default:

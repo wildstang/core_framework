@@ -30,7 +30,7 @@ public abstract class I2COutput extends AbstractOutput
    {
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "logCurrentState");
 
-      getStateTracker().addState(getName(), getName(), getValue());
+//      getStateTracker().addState(getName(), getName(), getValue());
       
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "logCurrentState");
    }
