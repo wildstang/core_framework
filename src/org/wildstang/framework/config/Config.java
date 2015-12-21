@@ -134,6 +134,8 @@ public class Config
     */
    protected Object parseValue(String p_valueStr)
    {
+      CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
+      
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "parseValue");
 
       Object result;
@@ -173,7 +175,10 @@ public class Config
          {
             s_log.finer("Failed parsing as boolean. Leaving as String value");
          }
-         result = p_valueStr;
+         if (p_valueStr != null && !p_valueStr.equals(""))
+         {
+            result = p_valueStr;
+         }
       }
       
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "parseValue");
@@ -183,6 +188,8 @@ public class Config
    
    protected Double parseDouble(String p_valueStr)
    {
+      CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
+      
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "parseDouble");
 
       Double d = null;
@@ -205,6 +212,8 @@ public class Config
    
    protected Integer parseInt(String p_valueStr)
    {
+      CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
+      
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "parseInt");
 
       Integer i = null;
@@ -224,6 +233,8 @@ public class Config
    
    protected Boolean parseBoolean(String p_valueStr)
    {
+      CoreUtils.checkNotNull(p_valueStr, "p_valueStr is null");
+      
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "parseBoolean");
 
       Boolean b = null;

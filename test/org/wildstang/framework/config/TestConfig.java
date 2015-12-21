@@ -271,7 +271,7 @@ public class TestConfig extends BaseTest
       configureLogging();
       replayAll();
 
-      Object o = config.parseValue(EMPTY_LINE);
+      Object o = config.parseValue(null);
    }
 
    @Test
