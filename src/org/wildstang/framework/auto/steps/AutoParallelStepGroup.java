@@ -50,7 +50,7 @@ public class AutoParallelStepGroup extends AutoStep {
 		}
 		
 		if (steps.isEmpty()) {
-			finished = true;
+			setFinished(true);
 		}
 	}
 

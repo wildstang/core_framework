@@ -41,7 +41,7 @@ public class AutoParallelFinishedOnAnyStepGroup extends AutoStep {
 			}
 		}
 		if (steps.isEmpty()) {
-			finished = true;
+			setFinished(true);
 		}
 	}
 
