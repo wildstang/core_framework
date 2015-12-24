@@ -35,7 +35,7 @@ public class AutoSerialStepGroup extends AutoStep {
 	}
 
 	public void update() {
-		if (finished) {
+		if (isFinished()) {
 			return;
 		}
 		if (finishedPreviousStep) {
@@ -43,7 +43,7 @@ public class AutoSerialStepGroup extends AutoStep {
 			currentStep++;
 			if (currentStep >= steps.size()) {
 				// We have reached the end of our list of steps, we're finished
-				finished = true;
+				setFinished(true);
 				return;
 			} else {
 				steps.get(currentStep).initialize();
@@ -80,6 +80,6 @@ public class AutoSerialStepGroup extends AutoStep {
 	}
 
 	public void finishGroup() {
-		finished = true;
+		setFinished(true);
 	}
 }

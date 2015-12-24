@@ -42,7 +42,7 @@ public class AutoStepDelay extends AutoStep /*
 	public void update() {
 		if (timer.hasPeriodPassed(delay)) {
 			timer.stop();
-			finished = true;
+			setFinished(true);
 			System.out.println("Timer at finished " + timer.get());
 		}
 	}
