@@ -692,11 +692,64 @@ public class TestConfig extends BaseTest
    // 2. Call with empty key
    // 3. call with valid key
    // 4. call with key not in config
-   @Test
-   public void testGetValueString()
+//   @Test
+//   public void testGetValueString()
+//   {
+//      fail("Not yet implemented"); // TODO
+//   }
+   
+   @Test(expected=NullPointerException.class)
+   public void testGetValueStringNull()
    {
-      fail("Not yet implemented"); // TODO
+	// 1. Call with null key
+	   configureLogging();
+	   replayAll();
+	   
+	   config.load(createConfigReader(false, false));
+	   
+	   config.getValue(NULL_LINE);
    }
+   @Test
+   public void testGetValueStringEmpty()
+   {
+	// 2. Call with empty key
+	   configureLogging();
+	   replayAll();
+	   
+	   config.load(createConfigReader(true, false));
+	   
+	   Object o = config.getValue(EMPTY_LINE);
+	   
+	   assertEquals(null, o);
+   }
+   @Test
+   public void testGetValueStringValid()
+   {
+	// 3. Call with valid key
+	   configureLogging();
+	   replayAll();
+	   
+	   config.load(createConfigReader(false, false));
+	   
+	   Object o = config.getValue(AMBIGUOUS_KEY);
+	   
+	   assertEquals(AMBIGUOUS_VALUE, o);
+   }
+   @Test
+   public void testGetValueStringMissing()
+   {
+	// 4. call with key not in config
+	   configureLogging();
+	   replayAll();
+	   
+	   config.load(createConfigReader(false, false));
+	   
+	   Object o = config.getValue("NoValue");
+	   
+	   assertEquals(null, o);
+   }
+
+
 
 //-----------------------------------
 
@@ -706,12 +759,61 @@ public class TestConfig extends BaseTest
    // 2. Call with empty key
    // 3. call with valid key
    // 4. call with key not in config
-   @Test
-   public void testGetValueStringObject()
+//   @Test
+//   public void testGetValueStringObject()
+//   {
+//      fail("Not yet implemented"); // TODO
+//   }
+   @Test(expected=NullPointerException.class)
+   public void testGetValueStringObjectNull()
    {
-      fail("Not yet implemented"); // TODO
+		// 1. Call with null key
+	   configureLogging();
+	   replayAll();
+	   
+	   config.load(createConfigReader(false, false));
+	   
+	   config.getValue(NULL_LINE, 5);
    }
-
+   @Test
+   public void testGetValueStringObjectEmpty()
+   {
+		// 2. Call with empty key
+	   configureLogging();
+	   replayAll();
+	   
+	   config.load(createConfigReader(true, false));
+	   
+	   Object o = config.getValue(EMPTY_LINE, 5);
+	   
+	   assertEquals(5, o);
+   }
+   @Test
+   public void testGetValueStringObjectValid()
+   {
+		// 3. Call with valid key
+	   configureLogging();
+	   replayAll();
+	   
+	   config.load(createConfigReader(false, false));
+	   
+	   Object o = config.getValue(AMBIGUOUS_KEY, 5);
+	   
+	   assertEquals(AMBIGUOUS_VALUE, o);
+   }
+   @Test
+   public void testGetValueStringObjectMissing()
+   {
+		// 4. call with key not in config
+	   configureLogging();
+	   replayAll();
+	   
+	   config.load(createConfigReader(false, false));
+	   
+	   Object o = config.getValue("NoValue", 5);
+	   
+	   assertEquals(5, o);
+   }
    
 //-----------------------------------
    // Test getDouble

@@ -257,6 +257,8 @@ public class Config
 
    public Object getValue(String p_key)
    {
+	  CoreUtils.checkNotNull(p_key, "p_key is null");
+	   
       Object result = null;
       
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "getValue");
