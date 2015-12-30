@@ -16,27 +16,25 @@ public class WsI2COutput extends I2COutput
 
       i2c = new I2C(port, p_address);
 
-//      // Fire up the message sender thread.
-//      Thread t = new Thread(messageSender = new MessageHandler(i2c));
-//      // This is safe because there is only one instance of the subsystem in
-//      // the subsystem container.
-//      t.start();
-//
+      // Fire up the message sender thread.
+      Thread t = new Thread(messageSender = new MessageHandler(i2c));
+      // This is safe because there is only one instance of the subsystem in
+      // the subsystem container.
+      t.start();
    }
 
    @Override
    protected void sendDataToOutput()
    {
-//      synchronized (messageSender)
-//      {
+      synchronized (messageSender)
+      {
          byte[] data = getValue();
          if (data != null)
          {
-            i2c.writeBulk(data);//transaction(data, data.length, null, 0);
-//            messageSender.setSendData(data, data.length);
-//            messageSender.notify();
+            messageSender.setSendData(data, data.length);
+            messageSender.notify();
          }
-//      }
+      }
       
       // Reset so we only send when we have new data
       setValue(null);
@@ -74,7 +72,7 @@ public class WsI2COutput extends I2COutput
                   if (sendSize >= 0 && dataToSend)
                   {
                      // set receive size to 0 to avoid sending an i2c read request.
-                     i2c.writeBulk(sendData);//transaction(sendData, sendSize, rcvBytes, 0);
+                     i2c.transaction(sendData, sendSize, rcvBytes, 0);
                      dataToSend = false;
                   }
                }
