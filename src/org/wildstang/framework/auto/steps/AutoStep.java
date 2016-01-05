@@ -11,7 +11,7 @@ package org.wildstang.framework.auto.steps;
 public abstract class AutoStep
 {
 
-   private boolean finished;
+   protected boolean finished;
 
    public AutoStep()
    {
