@@ -11,6 +11,7 @@ public enum WSInputType implements InputType
    JS_JOYSTICK("Joystick"),
    JS_DPAD("Joystick DPad"),
    LIDAR("LIDAR"),
+   I2C("I2C"),
    ABSOLUTE_ENCODER("Absolute Encoder"),
    NULL("Null");
 
