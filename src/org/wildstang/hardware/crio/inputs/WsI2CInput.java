@@ -23,13 +23,13 @@ public class WsI2CInput extends I2CInput
    {
       // synchronized (messageReceiver)
       // {
-      byte[] data = new byte[1];
-      if (data != null)
-      {
-         i2c.readOnly(data, 1);//transaction(data, data.length, null, 0);
+      byte[] data = new byte[2];
+//      if (data != null)
+//      {
+         i2c.readOnly(data, 2);//transaction(data, data.length, null, 0);
          // messageSender.setSendData(data, data.length);
          // messageSender.notify();
-      }
+//      }
       // }
 
       // Reset so we only send when we have new data

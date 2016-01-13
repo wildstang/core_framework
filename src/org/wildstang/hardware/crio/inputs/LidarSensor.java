@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class LidarSensor implements PIDSource {
+public class LidarSensor/* implements PIDSource */{
 	private I2C i2c;
 	private byte[] distance;
 	private java.util.Timer updater;
