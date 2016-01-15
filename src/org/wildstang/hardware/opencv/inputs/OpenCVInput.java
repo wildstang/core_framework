@@ -3,12 +3,14 @@ package org.wildstang.hardware.opencv.inputs;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
-import org.opencv.highgui.VideoCapture;
+import org.opencv.core.*;
+import org.opencv.videoio.VideoCapture;
+//import org.opencv.highgui.Highgui;
+//import org.opencv.highgui.VideoCapture;
 //import org.opencv.core.Mat;
 //import org.opencv.highgui.Highgui;
 //import org.opencv.highgui.VideoCapture;
+import org.opencv.videoio.Videoio;
 import org.wildstang.framework.io.inputs.ImageInput;
 
 
@@ -27,11 +29,11 @@ public class OpenCVInput extends ImageInput
       super(p_name);
       
       camera = new VideoCapture(0);
-      camera.set(Highgui.CV_CAP_PROP_FRAME_WIDTH, width);
-      camera.set(Highgui.CV_CAP_PROP_FRAME_HEIGHT, height);
+      camera.set(Videoio.CV_CAP_PROP_FRAME_WIDTH, width);
+      camera.set(Videoio.CV_CAP_PROP_FRAME_HEIGHT, height);
 
-      width = camera.get(Highgui.CV_CAP_PROP_FRAME_WIDTH);
-      height = camera.get(Highgui.CV_CAP_PROP_FRAME_HEIGHT);
+      width = camera.get(Videoio.CV_CAP_PROP_FRAME_WIDTH);
+      height = camera.get(Videoio.CV_CAP_PROP_FRAME_HEIGHT);
    }
    
    @Override
