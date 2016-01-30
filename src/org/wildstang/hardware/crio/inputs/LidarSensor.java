@@ -4,11 +4,12 @@ import java.util.TimerTask;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
-import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 public class LidarSensor{
+    
 	private I2C i2c;
 	private byte[] distance;
 	private java.util.Timer updater;

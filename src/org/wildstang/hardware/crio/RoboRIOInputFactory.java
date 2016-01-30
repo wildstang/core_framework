@@ -11,6 +11,7 @@ import org.wildstang.hardware.crio.inputs.WsAbsoluteEncoder;
 import org.wildstang.hardware.crio.inputs.WsAnalogInput;
 import org.wildstang.hardware.crio.inputs.WsDigitalInput;
 import org.wildstang.hardware.crio.inputs.WsHallEffectInput;
+import org.wildstang.hardware.crio.inputs.WsI2CInput;
 import org.wildstang.hardware.crio.inputs.WsJoystickAxis;
 import org.wildstang.hardware.crio.inputs.WsJoystickButton;
 import org.wildstang.hardware.crio.inputs.WsLIDAR;
@@ -20,6 +21,8 @@ import org.wildstang.hardware.crio.inputs.config.WsDigitalInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsI2CInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsJSButtonInputConfig;
 import org.wildstang.hardware.crio.inputs.config.WsJSJoystickInputConfig;
+import org.wildstang.hardware.crio.outputs.WsI2COutput;
+import org.wildstang.hardware.crio.outputs.config.WsI2COutputConfig;
 
 
 public class RoboRIOInputFactory implements InputFactory
@@ -84,6 +87,9 @@ public class RoboRIOInputFactory implements InputFactory
          case JS_JOYSTICK:
             in = new WsJoystickAxis(p_input.getName(), ((WsJSJoystickInputConfig)p_input.getConfig()).getPort(), ((WsJSJoystickInputConfig)p_input.getConfig()).getAxis());
             break;
+         case I2C:
+             in = new WsI2CInput(p_input.getName(), ((WsI2CInputConfig)p_input.getConfig()).getPort(), ((WsI2CInputConfig)p_input.getConfig()).getAddress());
+             break;
          case NULL:
          default:
 //            in = new NullAnalogInput(p_name);
