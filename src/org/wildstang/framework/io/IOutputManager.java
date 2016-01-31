@@ -1,9 +1,12 @@
 package org.wildstang.framework.io;
 
+import java.util.HashMap;
+
 public interface IOutputManager
 {
 
    public void init();
+
    /**
     * Updates all outputs registered with the manager.
     */
@@ -20,5 +23,7 @@ public interface IOutputManager
    public void removeAll();
 
    public boolean contains(String p_name);
+
+   public HashMap<String, Output> getHashMap();
 
 }

@@ -12,10 +12,12 @@ public enum WSOutputType implements OutputType
    TALON("Talon"),
    RELAY("Relay"),
    I2C("I2C"),
+   REMOTE_ANALOG("Remote Analog"),
+   REMOTE_DIGITAL("Remote Digital"),
    NULL("Null");
 
    private String m_typeStr;
-   
+
    WSOutputType(String p_typeStr)
    {
       m_typeStr = p_typeStr;
@@ -26,6 +28,5 @@ public enum WSOutputType implements OutputType
    {
       return m_typeStr;
    }
-   
 
 }

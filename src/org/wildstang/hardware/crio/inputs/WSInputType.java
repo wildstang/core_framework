@@ -14,10 +14,12 @@ public enum WSInputType implements InputType
    ENCODER("Encoder"),
    NULL("Null"),
    CAMERA("Camera"),
-   ABSOLUTE_ENCODER("Absolute Encoder");	
+   REMOTE_ANALOG("RemoteAnalogInput"),
+   REMOTE_DIGITAL("RemoteDigitalInput"),
+   ABSOLUTE_ENCODER("Absolute Encoder");
 
    private String m_typeStr;
-   
+
    WSInputType(String p_typeStr)
    {
       m_typeStr = p_typeStr;
@@ -28,6 +30,5 @@ public enum WSInputType implements InputType
    {
       return m_typeStr;
    }
-   
-   
+
 }
