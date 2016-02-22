@@ -26,8 +26,6 @@ public class RemoteAnalogOutput extends AnalogOutput
    @Override
    protected void sendDataToOutput()
    {
-      // System.out.println("Setting " + getName() + " From "
-      // + remoteIOTable.toString());
       remoteIOTable.putNumber(getName(), getValue());
    }
 
