@@ -4,13 +4,20 @@ import org.wildstang.framework.io.inputs.InputType;
 
 public enum WSInputType implements InputType
 {
-   SWITCH("Digital"), HALL_EFFECT("Hall Effect"), POT("Analog"), 
+   SWITCH("Digital"),
+	HALL_EFFECT("Hall Effect"),
+	POT("Analog"),
    JS_BUTTON("Joystick Button"), 
    JS_JOYSTICK("Joystick"), 
    JS_DPAD("Joystick DPad"), 
-   LIDAR("LIDAR"), I2C("I2C"), 
+   LIDAR("LIDAR"),
+	I2C("I2C"), 
    ABSOLUTE_ENCODER("Absolute Encoder"), 
-   MOTION_PROFILE_CONTROL("Motion Profile Control"), NULL("Null");
+   MOTION_PROFILE_CONTROL("Motion Profile Control"),
+	CAMERA("Camera"),
+   REMOTE_ANALOG("RemoteAnalogInput"),
+   REMOTE_DIGITAL("RemoteDigitalInput"),
+   NULL("Null");
 
    private String m_typeStr;
 

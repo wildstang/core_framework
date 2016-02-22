@@ -1,9 +1,12 @@
 package org.wildstang.framework.io;
 
+import java.util.HashMap;
+
 public interface IInputManager
 {
 
    public void init();
+
    /**
     * Updates all inputs registered with the manager.
     */
@@ -20,5 +23,7 @@ public interface IInputManager
    public void removeAll();
 
    public boolean contains(String p_name);
+
+   public HashMap<String, Input> getHashMap();
 
 }

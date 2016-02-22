@@ -33,10 +33,9 @@ public class OutputManager implements IOutputManager
       {
          s_initialised = true;
       }
-      
-     s_log.exiting(s_className, "init");
-   }
 
+      s_log.exiting(s_className, "init");
+   }
 
    @Override
    public void update()
@@ -52,7 +51,7 @@ public class OutputManager implements IOutputManager
             {
                s_log.finest("Updating Output: " + out.getName());
             }
-   
+
             // Update the output - send value to output
             out.update();
          }
@@ -60,30 +59,31 @@ public class OutputManager implements IOutputManager
          {
             if (s_log.isLoggable(Level.FINEST))
             {
-               s_log.finest("Output " + out.getName() + " is disabled. Not calling update.");
+               s_log.finest("Output " + out.getName()
+                     + " is disabled. Not calling update.");
             }
          }
       }
-      
+
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "update");
    }
-   
+
    @Override
    public void addOutput(Output p_output)
    {
       CoreUtils.checkNotNull(p_output, "p_output is null");
-      
+
       if (!m_outputs.containsKey(p_output.getName()))
       {
          m_outputs.put(p_output.getName(), p_output);
       }
    }
-   
+
    @Override
    public void removeOutput(Output p_output)
    {
       CoreUtils.checkNotNull(p_output, "p_output is null");
-      
+
       if (s_log.isLoggable(Level.WARNING))
       {
          s_log.warning("Removing output " + p_output.getName());
@@ -91,19 +91,19 @@ public class OutputManager implements IOutputManager
       m_outputs.remove(p_output.getName());
    }
 
-   
    @Override
    public Output getOutput(String p_name)
    {
       CoreUtils.checkNotNull(p_name, "p_name is null");
       Output output = null;
-      
+
       if (!m_outputs.containsKey(p_name))
       {
-         throw new NoSuchElementException("No input with name '" + p_name + "' in InputManager");
+         throw new NoSuchElementException("No input with name '" + p_name
+               + "' in InputManager");
       }
       output = m_outputs.get(p_name);
-      
+
       return output;
    }
 
@@ -113,16 +113,22 @@ public class OutputManager implements IOutputManager
       CoreUtils.checkNotNull(p_name, "p_name is null");
       return m_outputs.containsKey(p_name);
    }
-   
+
    @Override
    public int size()
    {
       return m_outputs.size();
    }
-   
+
    @Override
    public void removeAll()
    {
       m_outputs.clear();
+   }
+
+   @Override
+   public HashMap<String, Output> getHashMap()
+   {
+      return (HashMap<String, Output>) m_outputs.clone();
    }
 }
