@@ -32,7 +32,6 @@ public class WsSmartDashboard
             {
                InetAddress addr = addresses.nextElement();
                ip = addr.getHostAddress();
-               System.out.println(iface.getDisplayName() + " " + ip);
             }
          }
       }
@@ -67,6 +66,5 @@ public class WsSmartDashboard
 
       table.putString(key + NetworkTable.PATH_SEPARATOR + "url", urlStr);
       table.putBoolean(key + NetworkTable.PATH_SEPARATOR + "changed", toggle);
-      System.out.println(urlStr + " " + toggle);
    }
 }
