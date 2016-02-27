@@ -16,6 +16,7 @@ import org.wildstang.hardware.beaglebone.inputs.BBBDigitalInput;
 import org.wildstang.hardware.beaglebone.inputs.BBBInputType;
 import org.wildstang.hardware.beaglebone.inputs.config.BBBAnalogInputConfig;
 import org.wildstang.hardware.beaglebone.inputs.config.BBBDigitalInputConfig;
+import org.wildstang.hardware.opencv.inputs.OpenCVInput;
 
 public class BBBInputFactory implements InputFactory
 {
@@ -56,6 +57,9 @@ public class BBBInputFactory implements InputFactory
 
       switch ((BBBInputType) p_input.getType())
       {
+         case CAMERA:
+            in = new OpenCVInput(p_input.getName());
+            break;
          case SWITCH:
             in = new BBBDigitalInput(BBBManager.getInstance().getBoard(), p_input.getName(), ((BBBDigitalInputConfig) p_input.getConfig()).getPort(), ((BBBDigitalInputConfig) p_input.getConfig()).getPullup());
             break;
