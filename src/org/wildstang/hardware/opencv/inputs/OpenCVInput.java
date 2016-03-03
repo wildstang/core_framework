@@ -22,6 +22,7 @@ public class OpenCVInput extends ImageInput
    private VideoCapture camera;
    private double width = 320;
    private double height = 240;
+   Mat imgInput;
 
    public OpenCVInput(String p_name)
    {
@@ -33,6 +34,7 @@ public class OpenCVInput extends ImageInput
 
       width = camera.get(Highgui.CV_CAP_PROP_FRAME_WIDTH);
       height = camera.get(Highgui.CV_CAP_PROP_FRAME_HEIGHT);
+      imgInput = new Mat();
    }
 
    @Override
@@ -41,8 +43,6 @@ public class OpenCVInput extends ImageInput
       // TODO Auto-generated method stub
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "readRawValue");
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "readRawValue");
-
-      Mat imgInput = new Mat();
 
       camera.read(imgInput);
 

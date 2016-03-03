@@ -9,6 +9,7 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.Highgui;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 
 public class WsSmartDashboard
 {
@@ -44,16 +45,10 @@ public class WsSmartDashboard
    // public static void putImage(String key, Mat img)
    public static void putImage(String key, Mat img)
    {
-      String filename = key + ".jpg";
-      Highgui.imwrite("/public/img/" + filename, img);
-      String urlStr = "";
-
-      urlStr = "http://" + ip + ":8888/img/" + filename;
 
       Boolean toggle;
-      if (!table.containsKey(key))
+      if (!table.containsKey(key + NetworkTable.PATH_SEPARATOR + "changed"))
       {
-         table.putString(key, urlStr);
          table.putString(key + NetworkTable.PATH_SEPARATOR + "~TYPE~", "BBBCamera");
          toggle = true;
       }
@@ -64,7 +59,45 @@ public class WsSmartDashboard
                + "changed", true);
       }
 
+      String filename = key + ".jpg";
+      Highgui.imwrite("/public/img/" + filename, img);
+      String urlStr = "";
+
+      urlStr = "http://" + ip + ":8888/img/" + filename;
+
       table.putString(key + NetworkTable.PATH_SEPARATOR + "url", urlStr);
       table.putBoolean(key + NetworkTable.PATH_SEPARATOR + "changed", toggle);
+   }
+
+   public static void putNumber(String key, double value)
+   {
+      table.putNumber(key, value);
+   }
+
+   public static void putBoolean(String key, boolean value)
+   {
+      table.putBoolean(key, value);
+   }
+
+   public static double getNumber(String key)
+         throws TableKeyNotDefinedException
+   {
+      return table.getNumber(key);
+   }
+
+   public static double getNumber(String key, double defaultValue)
+   {
+      return table.getNumber(key, defaultValue);
+   }
+
+   public static boolean getBoolean(String key)
+         throws TableKeyNotDefinedException
+   {
+      return table.getBoolean(key);
+   }
+
+   public static boolean getBoolean(String key, boolean defaultValue)
+   {
+      return table.getBoolean(key, defaultValue);
    }
 }
