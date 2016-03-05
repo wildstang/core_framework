@@ -19,8 +19,16 @@ public class WsSmartDashboard
 
    public static void init()
    {
+      ip = getIP();
+   }
+
+   public static String getIP()
+   {
       try
       {
+         String ipAddr = null;
+         String radioIpAddr = null;
+         String usbIpAddr = null;
          Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
          while (interfaces.hasMoreElements())
          {
@@ -32,8 +40,29 @@ public class WsSmartDashboard
             while (addresses.hasMoreElements())
             {
                InetAddress addr = addresses.nextElement();
-               ip = addr.getHostAddress();
+
+               ipAddr = addr.getHostAddress();
+               if (ipAddr.startsWith("10.1.11"))
+               {
+                  radioIpAddr = ipAddr;
+               }
+               else if (ipAddr.equalsIgnoreCase("192.168.7.2"))
+               {
+                  usbIpAddr = ipAddr;
+               }
             }
+         }
+         if (radioIpAddr != null)
+         {
+            return radioIpAddr;
+         }
+         else if (usbIpAddr != null)
+         {
+            return usbIpAddr;
+         }
+         else
+         {
+            return ipAddr;
          }
       }
       catch (SocketException e)
@@ -45,28 +74,36 @@ public class WsSmartDashboard
    // public static void putImage(String key, Mat img)
    public static void putImage(String key, Mat img)
    {
-
-      Boolean toggle;
-      if (!table.containsKey(key + NetworkTable.PATH_SEPARATOR + "changed"))
+      if (ip == null)
       {
+         ip = getIP();
+      }
+
+      int count = ((int) table.getNumber(key + NetworkTable.PATH_SEPARATOR
+            + "count", -1));
+
+      if (count < 0)
+      {
+         // count key does not exist, create new BBBCamera key by adding the
+         // ~TYPE~ specifier
          table.putString(key + NetworkTable.PATH_SEPARATOR + "~TYPE~", "BBBCamera");
-         toggle = true;
+         count = 0;
       }
       else
       {
-         // Key exists, toggle to update
-         toggle = !table.getBoolean(key + NetworkTable.PATH_SEPARATOR
-               + "changed", true);
+         // Key exists increment count
+         count++;
+         count = count % 5;
       }
 
-      String filename = key + ".jpg";
+      String filename = key + count + ".jpg";
       Highgui.imwrite("/public/img/" + filename, img);
       String urlStr = "";
 
       urlStr = "http://" + ip + ":8888/img/" + filename;
 
       table.putString(key + NetworkTable.PATH_SEPARATOR + "url", urlStr);
-      table.putBoolean(key + NetworkTable.PATH_SEPARATOR + "changed", toggle);
+      table.putNumber(key + NetworkTable.PATH_SEPARATOR + "count", (double) count);
    }
 
    public static void putNumber(String key, double value)
