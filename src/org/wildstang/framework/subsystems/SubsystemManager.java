@@ -21,12 +21,11 @@ public class SubsystemManager
 
    private ArrayList<Subsystem> m_subsystems = new ArrayList<Subsystem>();
    private boolean s_initialised = false;
-  
+
    public SubsystemManager()
    {
 
    }
-
 
    public void init()
    {
@@ -37,6 +36,17 @@ public class SubsystemManager
          s_initialised = true;
       }
       
+      for (Subsystem sub : m_subsystems)
+      {
+         if (s_log.isLoggable(Level.FINEST))
+         {
+            s_log.finest("Initializing Subsystem: " + sub.getName());
+         }
+
+         // Init all subsystems.
+         sub.init();
+      }
+
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "init");
    }
 
@@ -58,35 +68,35 @@ public class SubsystemManager
          // Update the output - send value to output
          sub.update();
       }
-      
+
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "update");
    }
-   
+
    public void addSubsystem(Subsystem p_subsystem)
    {
       CoreUtils.checkNotNull(p_subsystem, "p_subsystem is null");
-      
+
       if (!m_subsystems.contains(p_subsystem))
       {
          m_subsystems.add(p_subsystem);
       }
    }
-   
+
    public void removeSubsystem(Subsystem p_subsystem)
    {
       CoreUtils.checkNotNull(p_subsystem, "p_subsystem is null");
-      
+
       if (s_log.isLoggable(Level.WARNING))
       {
          s_log.warning("Removing Subsystem " + p_subsystem.getName());
       }
       m_subsystems.remove(p_subsystem);
    }
-   
+
    public Subsystem getSubsystem(String p_name)
    {
       CoreUtils.checkNotNull(p_name, "p_name is null");
-      
+
       Subsystem result = null;
 
       for (Subsystem sub : m_subsystems)
@@ -96,7 +106,7 @@ public class SubsystemManager
             result = sub;
          }
       }
-      
+
       return result;
    }
 
@@ -104,14 +114,14 @@ public class SubsystemManager
    {
       return m_subsystems;
    }
-   
+
    public void selfTestAll()
    {
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "selfTestAll");
-      
+
       // Turn off state tracking
       Core.getStateTracker().stopTrackingState();
-      
+
       for (Subsystem s : m_subsystems)
       {
          s.selfTest();
@@ -119,7 +129,7 @@ public class SubsystemManager
 
       // Turn back on state tracking
       Core.getStateTracker().startTrackingState();
-      
+
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "selfTestAll");
    }
 
@@ -133,4 +143,3 @@ public class SubsystemManager
       return m_subsystems.size();
    }
 }
-
