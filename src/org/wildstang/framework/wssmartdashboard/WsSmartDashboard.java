@@ -6,7 +6,8 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
+import org.wildstang.framework.core.Core;
+import org.wildstang.framework.subsystems.WsMJPEGstreamer;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
@@ -17,9 +18,12 @@ public class WsSmartDashboard
 
    private static String ip;
 
-   public static void init()
+   private static Core robot_core;
+
+   public static void init(Core p_core)
    {
       ip = getIP();
+      robot_core = p_core;
    }
 
    public static String getIP()
@@ -79,31 +83,25 @@ public class WsSmartDashboard
          ip = getIP();
       }
 
-      int count = ((int) table.getNumber(key + NetworkTable.PATH_SEPARATOR
-            + "count", -1));
-
-      if (count < 0)
+      WsMJPEGstreamer mjpegStream = (WsMJPEGstreamer) robot_core.getSubsystemManager().getSubsystem("WsMJPEGstreamer");
+      if (mjpegStream == null)
       {
-         // count key does not exist, create new BBBCamera key by adding the
-         // ~TYPE~ specifier
-         table.putString(key + NetworkTable.PATH_SEPARATOR + "~TYPE~", "BBBCamera");
-         count = 0;
-      }
-      else
-      {
-         // Key exists increment count
-         count++;
-         count = count % 5;
+         System.out.println("mjpegStream is null!");
+         return;
       }
 
-      String filename = key + count + ".jpg";
-      Highgui.imwrite("/public/img/" + filename, img);
+      // create new BBBCamera key by adding the
+      // ~TYPE~ specifier
+      table.putString(key + NetworkTable.PATH_SEPARATOR + "~TYPE~", "BBBCamera");
       String urlStr = "";
 
-      urlStr = "http://" + ip + ":8888/img/" + filename;
+      String port = mjpegStream.getPort();
 
-      table.putString(key + NetworkTable.PATH_SEPARATOR + "url", urlStr);
-      table.putNumber(key + NetworkTable.PATH_SEPARATOR + "count", (double) count);
+      table.putString(key + NetworkTable.PATH_SEPARATOR + "ip", ip);
+      table.putString(key + NetworkTable.PATH_SEPARATOR + "port", port);
+
+      ((WsMJPEGstreamer) robot_core.getSubsystemManager().getSubsystem("WsMJPEGstreamer")).send(img);
+
    }
 
    public static void putNumber(String key, double value)
