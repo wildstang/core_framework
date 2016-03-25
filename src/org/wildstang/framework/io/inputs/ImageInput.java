@@ -10,12 +10,12 @@ public abstract class ImageInput extends AbstractInput
    private static final String s_className = "ImageInput";
 
    private Object m_currentValue = null;
-   
+
    public ImageInput(String p_name)
    {
       super(p_name);
    }
-   
+
    @Override
    public void readDataFromInput()
    {
@@ -26,9 +26,10 @@ public abstract class ImageInput extends AbstractInput
       // Only update if the value has changed
       if (s_log.isLoggable(Level.FINEST))
       {
-         s_log.finest("Current value = " + m_currentValue + " : New value = " + newValue);
+         s_log.finest("Current value = " + m_currentValue + " : New value = "
+               + newValue);
       }
-      
+
       if (!newValue.equals(m_currentValue))
       {
          setCurrentValue(newValue);
@@ -44,21 +45,21 @@ public abstract class ImageInput extends AbstractInput
    }
 
    protected abstract Object readRawValue();
-   
+
    public Object getValue()
    {
       return m_currentValue;
    }
-   
+
    @Override
    protected void logCurrentStateInternal()
    {
       if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "logCurrentState");
 
       // TODO What value could be logged here?
-//      getStateTracker().addState(getName(), getName(), getValue());
-      
+      // getStateTracker().addState(getName(), getName(), getValue());
+
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "logCurrentState");
    }
-   
+
 }
