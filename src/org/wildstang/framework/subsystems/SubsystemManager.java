@@ -35,6 +35,17 @@ public class SubsystemManager
       {
          s_initialised = true;
       }
+      
+      for (Subsystem sub : m_subsystems)
+      {
+         if (s_log.isLoggable(Level.FINEST))
+         {
+            s_log.finest("Initializing Subsystem: " + sub.getName());
+         }
+
+         // Init all subsystems.
+         sub.init();
+      }
 
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "init");
    }
