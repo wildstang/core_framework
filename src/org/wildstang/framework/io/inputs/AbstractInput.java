@@ -10,7 +10,7 @@ import org.wildstang.framework.io.Input;
 import org.wildstang.framework.io.InputListener;
 import org.wildstang.framework.logger.StateTracker;
 
-import com.sun.jndi.cosnaming.CNNameParser;
+//import com.sun.jndi.cosnaming.CNNameParser;
 
 /**
  * This is an abstract implementation of the Input interface. This class

@@ -66,12 +66,15 @@ public class WsMJPEGstreamer implements Subsystem, Runnable
    public void send(Mat img)
    {
       // Convert from mat to byte stream
-      MatOfByte bytemat = new MatOfByte();
-      Highgui.imencode(".jpg", img, bytemat);
-      byte[] bytes = bytemat.toArray();
-      for (SocketWorker w : workers)
+      if (img != null && !img.empty())
       {
-         w.send(bytes);
+         MatOfByte bytemat = new MatOfByte();
+         Highgui.imencode(".jpg", img, bytemat);
+         byte[] bytes = bytemat.toArray();
+         for (SocketWorker w : workers)
+         {
+            w.send(bytes);
+         }
       }
    }
 
