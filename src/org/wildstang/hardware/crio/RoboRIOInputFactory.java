@@ -90,7 +90,7 @@ public class RoboRIOInputFactory implements InputFactory
             in = new WsJoystickAxis(p_input.getName(), ((WsJSJoystickInputConfig) p_input.getConfig()).getPort(), ((WsJSJoystickInputConfig) p_input.getConfig()).getAxis());
             break;
          case JS_DPAD_BUTTON:
-            in = new WsDPadButton(p_input.getName(), ((WsJSJoystickInputConfig) p_input.getConfig()).getPort(), ((WsJSButtonInputConfig) p_input.getConfig()).getButton());
+            in = new WsDPadButton(p_input.getName(), ((WsJSButtonInputConfig) p_input.getConfig()).getPort(), ((WsJSButtonInputConfig) p_input.getConfig()).getButton());
             break;
          case REMOTE_DIGITAL:
             in = new RemoteDigitalInput(p_input.getName(), ((WsRemoteDigitalInputConfig) p_input.getConfig()).getTableName());
