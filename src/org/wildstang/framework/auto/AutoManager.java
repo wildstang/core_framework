@@ -67,6 +67,7 @@ public class AutoManager
       {
          runningProgram = programs.get(0);
       }
+//      runningProgram = programs.get(1);
       s_log.logp(Level.ALL, "Auton", "Running Autonomous Program", runningProgram.toString());
       runningProgram.initialize();
       SmartDashboard.putString("Running Autonomous Program", runningProgram.toString());
