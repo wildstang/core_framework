@@ -13,6 +13,7 @@ import org.wildstang.framework.io.inputs.RemoteDigitalInput;
 import org.wildstang.hardware.crio.inputs.WSInputType;
 import org.wildstang.hardware.crio.inputs.WsAbsoluteEncoder;
 import org.wildstang.hardware.crio.inputs.WsAnalogInput;
+import org.wildstang.hardware.crio.inputs.WsDPadButton;
 import org.wildstang.hardware.crio.inputs.WsDigitalInput;
 import org.wildstang.hardware.crio.inputs.WsHallEffectInput;
 import org.wildstang.hardware.crio.inputs.WsI2CInput;
@@ -87,6 +88,9 @@ public class RoboRIOInputFactory implements InputFactory
             break;
          case JS_JOYSTICK:
             in = new WsJoystickAxis(p_input.getName(), ((WsJSJoystickInputConfig) p_input.getConfig()).getPort(), ((WsJSJoystickInputConfig) p_input.getConfig()).getAxis());
+            break;
+         case JS_DPAD_BUTTON:
+            in = new WsDPadButton(p_input.getName(), ((WsJSJoystickInputConfig) p_input.getConfig()).getPort(), ((WsJSButtonInputConfig) p_input.getConfig()).getButton());
             break;
          case REMOTE_DIGITAL:
             in = new RemoteDigitalInput(p_input.getName(), ((WsRemoteDigitalInputConfig) p_input.getConfig()).getTableName());
