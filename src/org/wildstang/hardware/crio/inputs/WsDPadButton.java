@@ -28,19 +28,19 @@ public class WsDPadButton extends DigitalInput
       {
          case JoystickConstants.DPAD_X_LEFT:
             value = m_joystick.getPOV();
-            boolValue = (value >= 225 && value < 315);
+            boolValue = (value == 270);
             break;
          case JoystickConstants.DPAD_X_RIGHT:
             value = m_joystick.getPOV();
-            boolValue = (value >= 45 && value < 135);
+            boolValue = (value == 90);
             break;
          case JoystickConstants.DPAD_Y_UP:
             value = m_joystick.getPOV();
-            boolValue = (value >= 315 && value < 45);
+            boolValue = (value == 0);
             break;
          case JoystickConstants.DPAD_Y_DOWN:
             value = m_joystick.getPOV();;
-            boolValue = (value >= 135 && value < 225);
+            boolValue = (value == 180);
             break;
       }
 
