@@ -28,9 +28,9 @@ public class BBBDigitalOutputConfig implements OutputConfig
    {
       StringBuffer buf = new StringBuffer();
       
-      buf.append("{\"port\": ");
+      buf.append("{\"port\": \"");
       buf.append(m_port);
-      buf.append("}");
+      buf.append("\"}");
       
       return buf.toString();
    }

@@ -262,7 +262,7 @@ public class StateLogger implements Runnable
       }
       else
       {
-         builder.append("\"" + portInfo + "\"");
+         builder.append(portInfo);
       }
       
       builder.append("}");
