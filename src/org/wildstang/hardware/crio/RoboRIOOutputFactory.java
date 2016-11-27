@@ -25,6 +25,7 @@ import org.wildstang.hardware.crio.outputs.config.WsDoubleSolenoidConfig;
 import org.wildstang.hardware.crio.outputs.config.WsI2COutputConfig;
 import org.wildstang.hardware.crio.outputs.config.WsRelayConfig;
 import org.wildstang.hardware.crio.outputs.config.WsSolenoidConfig;
+import org.wildstang.hardware.crio.outputs.config.WsServoConfig;
 import org.wildstang.hardware.crio.outputs.config.WsTalonConfig;
 import org.wildstang.hardware.crio.outputs.config.WsVictorConfig;
 
@@ -73,7 +74,8 @@ public class RoboRIOOutputFactory implements OutputFactory
             out = new WsDigitalOutput(p_output.getName(), ((WsDigitalOutputConfig) p_output.getConfig()).getChannel(), ((WsDigitalOutputConfig) p_output.getConfig()).getDefault());
             break;
          case SERVO:
-            out = new WsServo(p_output.getName(), ((WsAnalogOutputConfig) p_output.getConfig()).getChannel(), ((WsAnalogOutputConfig) p_output.getConfig()).getDefault());
+	    //out = new WsServo(p_output.getName(), ((WsAnalogOutputConfig) p_output.getConfig()).getChannel(), ((WsAnalogOutputConfig) p_output.getConfig()).getDefault());
+            out = new WsServo(p_output.getName(), ((WsServoConfig) p_output.getConfig()).getChannel(), ((WsServoConfig) p_output.getConfig()).getDefault());
             break;
          case RELAY:
             out = new WsRelay(p_output.getName(), ((WsRelayConfig) p_output.getConfig()).getChannel());
