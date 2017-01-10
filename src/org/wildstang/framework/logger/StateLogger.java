@@ -15,6 +15,7 @@ public class StateLogger implements Runnable
    private boolean m_stateWritten = false;
    private boolean m_running = false;
    private StateTracker m_tracker;
+   private long m_writeInterval = 200;
    
    public StateLogger(StateTracker p_tracker)
    {
@@ -59,8 +60,7 @@ public class StateLogger implements Runnable
          {
             try
             {
-               // TODO: make this configurable?
-               Thread.sleep(500);
+               Thread.sleep(m_writeInterval);
             }
             catch (InterruptedException e)
             {
@@ -96,6 +96,10 @@ public class StateLogger implements Runnable
       }
    }
    
+   public void setWriteInterval(long p_interval)
+   {
+      m_writeInterval = p_interval;
+   }
    
    protected void writeInfo(Writer p_output, IOSet p_set) throws IOException
    {
@@ -223,8 +227,8 @@ public class StateLogger implements Runnable
          
          builder.append("\t\t\t{\"name\":\"");
          builder.append(temp.getName());
-         builder.append("\",\"parent\":\"");
-         builder.append(temp.getParent());
+//         builder.append("\",\"parent\":\"");
+//         builder.append(temp.getParent());
          builder.append("\",\"value\":\"");
          builder.append(temp.getValue());
          builder.append("\"}");
