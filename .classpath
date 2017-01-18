@@ -13,13 +13,12 @@
 	<classpathentry exported="true" kind="lib" path="lib/powermock-easymock-1.6.2-full.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/opencv-2411.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/bulldog.beagleboneblack.hardfp.jar"/>
-	<classpathentry kind="var" path="wpilib" sourcepath="wpilib.sources"/>
-	<classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
-	<classpathentry kind="var" path="opencv" sourcepath="opencv.sources"/>
-	<classpathentry kind="var" path="cscore" sourcepath="cscore.sources"/>
-	<classpathentry kind="var" path="talon_lib"/>
-	<classpathentry kind="var" path="USERLIBS_DIR/bulldog.beagleboneblack.hardfp.jar"/>
-	<classpathentry kind="var" path="USERLIBS_DIR/opencv-2411.jar"/>
-	<classpathentry kind="var" path="USERLIBS_DIR/TalonSRXLibJava.jar"/>
+	<classpathentry exported="true" kind="var" path="wpilib" sourcepath="wpilib.sources"/>
+	<classpathentry exported="true" kind="var" path="networktables" sourcepath="networktables.sources"/>
+	<classpathentry exported="true" kind="var" path="opencv" sourcepath="opencv.sources"/>
+	<classpathentry exported="true" kind="var" path="cscore" sourcepath="cscore.sources"/>
+	<classpathentry exported="true" kind="var" path="USERLIBS_DIR/bulldog.beagleboneblack.hardfp.jar"/>
+	<classpathentry exported="true" kind="var" path="USERLIBS_DIR/opencv-2411.jar"/>
+	<classpathentry exported="true" kind="var" path="USERLIBS_DIR/CTRLib.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
