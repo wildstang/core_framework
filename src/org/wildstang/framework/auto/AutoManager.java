@@ -24,6 +24,7 @@ public class AutoManager
    private AutoStartPositionEnum currentPosition;
    private SendableChooser chooser;
    private SendableChooser lockinChooser;
+   private SendableChooser allianceChooser;
    private static Logger s_log = Logger.getLogger(AutoManager.class.getName());
 
    private AutoManager()
@@ -34,11 +35,14 @@ public class AutoManager
       lockinChooser.addDefault("Unlocked", false);
       lockinChooser.addObject("Locked", true);
 
+      allianceChooser.addDefault("Red", true);
+      allianceChooser.addObject("Blue", false);
+      
       definePrograms();
 
       SmartDashboard.putData("Select Autonomous Program", chooser);
       SmartDashboard.putData("Lock in auto program", lockinChooser);
-
+      SmartDashboard.putData("Alliance Color", allianceChooser);
       clear();
    }
 
@@ -131,6 +135,10 @@ public class AutoManager
       return AutoManager.instance;
    }
 
+   
+   public String getAllianceColor() {
+      return (String) allianceChooser.getSelected();
+   }
    /*
     * public void setProgram(int index) { if (index >= programs.size() || index
     * < 0) { index = 0; } currentProgram = index; lockedProgram =
