@@ -72,6 +72,30 @@ public class SubsystemManager
       if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "update");
    }
 
+   
+   /**
+    * Updates all outputs registered with the manager.
+    */
+   public void resetState()
+   {
+      if (s_log.isLoggable(Level.FINER)) s_log.entering(s_className, "resetState");
+
+      // Iterate over all outputs and update each one
+      for (Subsystem sub : m_subsystems)
+      {
+         if (s_log.isLoggable(Level.FINEST))
+         {
+            s_log.finest("Resetting Subsystem: " + sub.getName());
+         }
+
+         // Update the output - send value to output
+         sub.resetState();
+      }
+
+      if (s_log.isLoggable(Level.FINER)) s_log.exiting(s_className, "resetState");
+   }
+   
+   
    public void addSubsystem(Subsystem p_subsystem)
    {
       CoreUtils.checkNotNull(p_subsystem, "p_subsystem is null");

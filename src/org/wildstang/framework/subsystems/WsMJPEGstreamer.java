@@ -49,6 +49,15 @@ public class WsMJPEGstreamer implements Subsystem, Runnable
 
    }
 
+   
+   
+   @Override
+   public void resetState()
+   {
+      // TODO Auto-generated method stub
+      
+   }
+
    @Override
    public void selfTest()
    {

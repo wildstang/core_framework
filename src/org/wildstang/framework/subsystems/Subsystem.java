@@ -22,6 +22,13 @@ public interface Subsystem extends InputListener {
 	public void update();
 	
 	/**
+	 * Can be called to reset any state variables.  Can be used when changing modes or
+	 * reenabling system to reset to a default state without reinitialising connected
+	 * components.
+	 */
+	public void resetState();
+	
+	/**
 	 * Returns the name of the subsystem.
 	 * 
 	 * @return the name of the subsystem
