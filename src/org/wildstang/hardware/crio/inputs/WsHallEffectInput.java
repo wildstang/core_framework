@@ -58,7 +58,6 @@ public class WsHallEffectInput extends DiscreteInput
       {
          e.printStackTrace();
       }
-      SmartDashboard.putNumber("READ HALL POSITION", selectedHallEffectSensor);
       if (selectedHallEffectSensor != lastHallEffectSensor)
       {
          System.out.println("READ HALL EFFECT: " + selectedHallEffectSensor);

@@ -49,7 +49,6 @@ public class LidarSensor
          }
       }
 
-      SmartDashboard.putNumber("Number of valid elements", numValidElements);
       // Avoid divide by zero errors
       if (numValidElements > 0)
       {
@@ -102,7 +101,6 @@ public class LidarSensor
          else
          {
             recordedDistances[i] = new Integer(getDistance());
-            SmartDashboard.putNumber("latest distance", getDistance());
          }
       }
    }

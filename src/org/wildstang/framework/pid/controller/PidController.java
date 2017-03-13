@@ -396,9 +396,9 @@ public class PidController implements IPidController {
 		output = this.limitOutput(output);
 
 		// Update smart dashboard
-		SmartDashboard.putNumber(this.getName() + " PID output", output);
-		SmartDashboard.putNumber(this.getName() + " PID error", currentError);
-		SmartDashboard.putNumber(this.getName() + " PID input", current_pv);
+//		SmartDashboard.putNumber(this.getName() + " PID output", output);
+//		SmartDashboard.putNumber(this.getName() + " PID error", currentError);
+//		SmartDashboard.putNumber(this.getName() + " PID input", current_pv);
 
 		// Write the pid output, if it's enabled
 		if (outputEnabled) {
@@ -518,7 +518,6 @@ public class PidController implements IPidController {
 
 	public void notifyConfigChange() {
 		p = p_config;
-		SmartDashboard.putNumber(this.getName() + "New P", p);
 		i = i_config;
 		d = d_config;
 		errorIncrement = errorIncrement_config;
