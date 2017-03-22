@@ -45,8 +45,6 @@ public class WsI2CInput extends I2CInput
       {
          // Get ourselves an i2c instance to read data.
          i2c = p_i2c;
-         
-         rcvBytes = new byte[1];
       }
 
       @Override
@@ -54,6 +52,7 @@ public class WsI2CInput extends I2CInput
       {
          while (running)
          {
+            rcvBytes = new byte[1];
             // Read a single byte
             i2c.readOnly(rcvBytes, 1);
          }
