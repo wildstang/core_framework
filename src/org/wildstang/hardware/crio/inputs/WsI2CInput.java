@@ -17,17 +17,20 @@ public class WsI2CInput extends I2CInput
 
       i2c = new I2C(port, p_address);
       
-      m_handler = new MessageHandler(i2c);
-      Thread t = new Thread(m_handler);
-      t.start();
+//      m_handler = new MessageHandler(i2c);
+//      Thread t = new Thread(m_handler);
+//      t.start();
    }
 
    @Override
    protected byte[] readRawValue()
    {
-      byte[] data = m_handler.getRecentData();
+//      byte[] data = m_handler.getRecentData();
+      byte rcvBytes[] = new byte[1];
+      
+      i2c.readOnly(rcvBytes, 1);
 
-      return data;
+      return rcvBytes;//data;
    }
 
    private static class MessageHandler implements Runnable
