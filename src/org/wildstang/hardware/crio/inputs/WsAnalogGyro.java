@@ -24,6 +24,15 @@ public class WsAnalogGyro extends AnalogInput
 
       startTime = System.nanoTime();
       double angle1 = m_gyro.getAngle();
+
+      try
+      {
+         Thread.sleep(500);
+      }
+      catch (InterruptedException e)
+      {
+         e.printStackTrace();
+      }
       
       long endtTime = System.nanoTime();
       double angle2 = m_gyro.getAngle();
