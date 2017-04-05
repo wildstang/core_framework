@@ -9,7 +9,7 @@ public class WsI2CInput extends I2CInput
 {
 
    private I2C i2c;
-   MessageHandler m_handler;
+//   MessageHandler m_handler;
 
    public WsI2CInput(String name, Port port, int p_address)
    {
@@ -33,39 +33,39 @@ public class WsI2CInput extends I2CInput
       return rcvBytes;//data;
    }
 
-   private static class MessageHandler implements Runnable
-   {
-      // Offload to a thread avoid blocking main thread with I2C reads.
-
-      byte[] rcvBytes;
-      boolean running = true;
-      private I2C i2c;
-
-      public MessageHandler(I2C p_i2c)
-      {
-         // Get ourselves an i2c instance to read data.
-         i2c = p_i2c;
-      }
-
-      @Override
-      public void run()
-      {
-         while (running)
-         {
-            rcvBytes = new byte[1];
-            // Read a single byte
-            i2c.readOnly(rcvBytes, 1);
-         }
-      }
-
-      public byte[] getRecentData()
-      {
-         return rcvBytes;
-      }
-      
-      public void stop()
-      {
-         running = false;
-      }
-   }
+//   private static class MessageHandler implements Runnable
+//   {
+//      // Offload to a thread avoid blocking main thread with I2C reads.
+//
+//      byte[] rcvBytes;
+//      boolean running = true;
+//      private I2C i2c;
+//
+//      public MessageHandler(I2C p_i2c)
+//      {
+//         // Get ourselves an i2c instance to read data.
+//         i2c = p_i2c;
+//      }
+//
+//      @Override
+//      public void run()
+//      {
+//         while (running)
+//         {
+//            rcvBytes = new byte[1];
+//            // Read a single byte
+//            i2c.readOnly(rcvBytes, 1);
+//         }
+//      }
+//
+//      public byte[] getRecentData()
+//      {
+//         return rcvBytes;
+//      }
+//      
+//      public void stop()
+//      {
+//         running = false;
+//      }
+//   }
 }

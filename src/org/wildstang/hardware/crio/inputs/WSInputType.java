@@ -14,6 +14,7 @@ public enum WSInputType implements InputType
    LIDAR("LIDAR"),
 	I2C("I2C"), 
 	COMPASS("Compass"),
+	ANALOG_GYRO("Analog Gyro"),
    ABSOLUTE_ENCODER("Absolute Encoder"), 
    MOTION_PROFILE_CONTROL("Motion Profile Control"),
 	CAMERA("Camera"),
