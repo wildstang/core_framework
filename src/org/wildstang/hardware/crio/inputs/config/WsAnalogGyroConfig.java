@@ -30,7 +30,7 @@ public class WsAnalogGyroConfig implements InputConfig
       
       buf.append("{\"channel\": ");
       buf.append(m_channel);
-      buf.append("\",\"driftCompensation\": ");
+      buf.append(",\"driftCompensation\": ");
       buf.append(m_compensate);
       buf.append("}");
       
