@@ -54,4 +54,8 @@ public class WsAnalogGyro extends AnalogInput
       }
    }
 
+   public void calibrate()
+   {
+      m_gyro.calibrate();
+   }
 }
