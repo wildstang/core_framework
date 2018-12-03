@@ -10,10 +10,14 @@ import org.wildstang.framework.core.Core;
 import org.wildstang.framework.subsystems.WsMJPEGstreamer;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
+
 
 public class WsSmartDashboard
 {
+   public static class TableKeyNotDefinedException extends Exception {
+      public TableKeyNotDefinedException() {}
+   }
+   
    private static final NetworkTable table = NetworkTable.getTable("SmartDashboard");
 
    private static String ip;
@@ -117,7 +121,11 @@ public class WsSmartDashboard
    public static double getNumber(String key)
          throws TableKeyNotDefinedException
    {
-      return table.getNumber(key);
+      if (!table.containsKey(key)) {
+         throw new TableKeyNotDefinedException();
+      } else {
+         return table.getNumber(key, 0.0);
+      }
    }
 
    public static double getNumber(String key, double defaultValue)
@@ -128,7 +136,11 @@ public class WsSmartDashboard
    public static boolean getBoolean(String key)
          throws TableKeyNotDefinedException
    {
-      return table.getBoolean(key);
+      if (!table.containsKey(key)) {
+         throw new TableKeyNotDefinedException();
+      } else {
+         return table.getBoolean(key, false);
+      }
    }
 
    public static boolean getBoolean(String key, boolean defaultValue)
